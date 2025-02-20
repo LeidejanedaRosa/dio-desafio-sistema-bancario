@@ -28,7 +28,7 @@ O desafio consiste em criar um sistema bancário simples utilizando Python, refo
 
 3. Execute o script:  
    ```bash
-   python sistema_bancario.py
+   python3 sistema_bancario.py
    ```
 
 ## 🛠 Tecnologias Utilizadas  
