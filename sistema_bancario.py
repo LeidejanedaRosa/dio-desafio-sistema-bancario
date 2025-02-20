@@ -2,6 +2,7 @@ from datetime import datetime
 
 BALANCE = 5000.0
 DAILY_LIMIT = 1500.0
+MAX_WITHDRAWALS = 3  # Limite de saques diários
 extract: list[dict] = []
 
 while True:
@@ -15,14 +16,19 @@ while True:
         value = float(input("Digite o valor do saque: R$ "))
 
         today = datetime.now().date()
-        total_cashed_today = sum(
-            transaction["valor"]
-            for transaction in extract
-            if transaction["tipo"] == "Saque"
-            and transaction["data"].date() == today  # noqa
-        )
 
-        if value > BALANCE:
+        daily_withdrawals = [
+            t
+            for t in extract
+            if t["tipo"] == "Saque"
+            and datetime.fromisoformat(t["data"]).date() == today
+        ]
+
+        total_cashed_today = sum(t["valor"] for t in daily_withdrawals)
+
+        if len(daily_withdrawals) >= MAX_WITHDRAWALS:
+            print("\n\n❌ Limite de 3 saques diários atingido!\n\n")
+        elif value > BALANCE:
             print("\n\n❌ Saldo insuficiente!\n\n")
         elif total_cashed_today + value > DAILY_LIMIT:
             print("\n\n❌ Limite diário de saque atingido!\n\n")
@@ -58,7 +64,7 @@ while True:
                 "%d/%m/%Y %H:%M:%S"
             )
             print(
-                f"\n\n{formatted_date} - {transaction['tipo']}: R$ {transaction['valor']:.2f}\n\n"  # noqa
+                f"{formatted_date} - {transaction['tipo']}: R$ {transaction['valor']:.2f}"  # noqa
             )
         print(f"\n💰 Saldo atual: R$ {BALANCE:.2f}\n")
 
