@@ -2,7 +2,7 @@ from datetime import datetime
 
 BALANCE = 5000.0
 DAILY_LIMIT = 1500.0
-MAX_WITHDRAWALS = 3  # Limite de saques diários
+MAX_WITHDRAWALS = 3
 extract: list[dict] = []
 
 while True:

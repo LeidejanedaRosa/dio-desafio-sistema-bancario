@@ -12,7 +12,7 @@
         "kind": 5,
         "importPath": "sistema_bancario",
         "description": "sistema_bancario",
-        "peekOfCode": "BALANCE = 5000.0\nDAILY_LIMIT = 1500.0\nMAX_WITHDRAWALS = 3  # Limite de saques diários\nextract: list[dict] = []\nwhile True:\n    option = input(\n        \"\\nBem-vindo(a) ao Banco Python!\\nEscolha uma opção:\\n\\n\"\n        \"[1] - Saque\\n[2] - Depósito\\n[3] - Extrato\\n[4] - Sair\\n\\n\"\n        \"Digite o número da opção desejada: \"\n    )",
+        "peekOfCode": "BALANCE = 5000.0\nDAILY_LIMIT = 1500.0\nMAX_WITHDRAWALS = 3\nextract: list[dict] = []\nwhile True:\n    option = input(\n        \"\\nBem-vindo(a) ao Banco Python!\\nEscolha uma opção:\\n\\n\"\n        \"[1] - Saque\\n[2] - Depósito\\n[3] - Extrato\\n[4] - Sair\\n\\n\"\n        \"Digite o número da opção desejada: \"\n    )",
         "detail": "sistema_bancario",
         "documentation": {}
     },
@@ -21,7 +21,7 @@
         "kind": 5,
         "importPath": "sistema_bancario",
         "description": "sistema_bancario",
-        "peekOfCode": "DAILY_LIMIT = 1500.0\nMAX_WITHDRAWALS = 3  # Limite de saques diários\nextract: list[dict] = []\nwhile True:\n    option = input(\n        \"\\nBem-vindo(a) ao Banco Python!\\nEscolha uma opção:\\n\\n\"\n        \"[1] - Saque\\n[2] - Depósito\\n[3] - Extrato\\n[4] - Sair\\n\\n\"\n        \"Digite o número da opção desejada: \"\n    )\n    if option == \"1\":",
+        "peekOfCode": "DAILY_LIMIT = 1500.0\nMAX_WITHDRAWALS = 3\nextract: list[dict] = []\nwhile True:\n    option = input(\n        \"\\nBem-vindo(a) ao Banco Python!\\nEscolha uma opção:\\n\\n\"\n        \"[1] - Saque\\n[2] - Depósito\\n[3] - Extrato\\n[4] - Sair\\n\\n\"\n        \"Digite o número da opção desejada: \"\n    )\n    if option == \"1\":",
         "detail": "sistema_bancario",
         "documentation": {}
     },
@@ -30,7 +30,7 @@
         "kind": 5,
         "importPath": "sistema_bancario",
         "description": "sistema_bancario",
-        "peekOfCode": "MAX_WITHDRAWALS = 3  # Limite de saques diários\nextract: list[dict] = []\nwhile True:\n    option = input(\n        \"\\nBem-vindo(a) ao Banco Python!\\nEscolha uma opção:\\n\\n\"\n        \"[1] - Saque\\n[2] - Depósito\\n[3] - Extrato\\n[4] - Sair\\n\\n\"\n        \"Digite o número da opção desejada: \"\n    )\n    if option == \"1\":\n        value = float(input(\"Digite o valor do saque: R$ \"))",
+        "peekOfCode": "MAX_WITHDRAWALS = 3\nextract: list[dict] = []\nwhile True:\n    option = input(\n        \"\\nBem-vindo(a) ao Banco Python!\\nEscolha uma opção:\\n\\n\"\n        \"[1] - Saque\\n[2] - Depósito\\n[3] - Extrato\\n[4] - Sair\\n\\n\"\n        \"Digite o número da opção desejada: \"\n    )\n    if option == \"1\":\n        value = float(input(\"Digite o valor do saque: R$ \"))",
         "detail": "sistema_bancario",
         "documentation": {}
     }
