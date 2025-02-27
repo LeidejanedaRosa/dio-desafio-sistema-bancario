@@ -14,7 +14,11 @@ O desafio consiste em criar um sistema bancário simples utilizando Python, refo
 ### 📌 Versão 2:
 ✅ Todas as funcionalidades da versão 1
 ✅ Permite criar usuários com validação de CPF, nome, data de nascimento e endereço  
-✅ Permite criar contas bancárias associadas a um usuário  
+✅ Permite criar contas bancárias associadas a um usuário
+✅ Um usuário pode ter até 7 tipos de contas associadas
+✅ Permite editar os dados do usuário
+✅ Permite listar os usuários cadastrados e as contas bancárias
+✅ Permite encerrar uma conta
 ✅ Melhorias na estrutura do código utilizando funções para modularização  
 ✅ Implementação de um menu interativo para facilitar a navegação  
 ✅ Melhor tratamento de erros e validações  

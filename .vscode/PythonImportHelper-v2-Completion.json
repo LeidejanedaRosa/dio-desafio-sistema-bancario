@@ -56,7 +56,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "def validar_data_nascimento(data_nascimento):\n    if not data_nascimento:\n        print(\"\\n\\n❌ A data de nascimento é obrigatória!\\n\\n\")\n        return False\n    try:\n        datetime.strptime(data_nascimento, \"%d/%m/%Y\")\n    except ValueError:\n        print(\"\\n\\n❌ A data de nascimento deve estar no formato dd/mm/aaaa!\\n\\n\")\n        return False\n    return True",
+        "peekOfCode": "def validar_data_nascimento(data_nascimento):\n    if not data_nascimento:\n        print(\"\\n\\n❌ A data de nascimento é obrigatória!\\n\\n\")\n        return False\n    try:\n        datetime.strptime(data_nascimento, \"%d/%m/%Y\")\n    except ValueError:\n        print(\n            \"\\n\\n❌ A data de nascimento deve estar no formato dd/mm/aaaa!\\n\\n\"\n        )  # noqa",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     },
@@ -83,7 +83,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "def cpf_existe(cpf):\n    return any(usuario[\"cpf\"] == cpf for usuario in usuarios)\ndef obter_dado(campo, validacao):\n    while True:\n        dado = input(f\"Digite o {campo}: \").strip()\n        if validacao(dado):\n            return dado\n# Funções de operações bancárias\ndef verificar_limites_saque(\n    valor, saldo, limite, numero_saques, limite_saques, total_cashed_today",
+        "peekOfCode": "def cpf_existe(cpf):\n    return any(usuario[\"cpf\"] == cpf for usuario in usuarios)\ndef obter_dado(campo, validacao):\n    while True:\n        dado = input(f\"Digite o {campo}: \").strip()\n        if validacao(dado):\n            return dado\ndef verificar_limites_saque(\n    valor, saldo, limite, numero_saques, limite_saques, total_sacado_hoje\n):",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     },
@@ -92,7 +92,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "def obter_dado(campo, validacao):\n    while True:\n        dado = input(f\"Digite o {campo}: \").strip()\n        if validacao(dado):\n            return dado\n# Funções de operações bancárias\ndef verificar_limites_saque(\n    valor, saldo, limite, numero_saques, limite_saques, total_cashed_today\n):\n    if numero_saques >= limite_saques:",
+        "peekOfCode": "def obter_dado(campo, validacao):\n    while True:\n        dado = input(f\"Digite o {campo}: \").strip()\n        if validacao(dado):\n            return dado\ndef verificar_limites_saque(\n    valor, saldo, limite, numero_saques, limite_saques, total_sacado_hoje\n):\n    if numero_saques >= limite_saques:\n        print(\"\\n\\n❌ Limite de 3 saques diários atingido!\\n\\n\")",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     },
@@ -101,7 +101,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "def verificar_limites_saque(\n    valor, saldo, limite, numero_saques, limite_saques, total_cashed_today\n):\n    if numero_saques >= limite_saques:\n        print(\"\\n\\n❌ Limite de 3 saques diários atingido!\\n\\n\")\n        return False\n    elif valor > saldo:\n        print(\"\\n\\n❌ Saldo insuficiente!\\n\\n\")\n        return False\n    elif total_cashed_today + valor > limite:",
+        "peekOfCode": "def verificar_limites_saque(\n    valor, saldo, limite, numero_saques, limite_saques, total_sacado_hoje\n):\n    if numero_saques >= limite_saques:\n        print(\"\\n\\n❌ Limite de 3 saques diários atingido!\\n\\n\")\n        return False\n    elif valor > saldo:\n        print(\"\\n\\n❌ Saldo insuficiente!\\n\\n\")\n        return False\n    elif total_sacado_hoje + valor > limite:",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     },
@@ -115,20 +115,20 @@
         "documentation": {}
     },
     {
-        "label": "saque",
+        "label": "sacar",
         "kind": 2,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "def saque():\n    conta = obter_conta()\n    if not conta:\n        return\n    valor = float(input(\"Digite o valor do saque: R$ \"))\n    saldo = BALANCE\n    limite = DAILY_LIMIT\n    numero_saques = len(\n        [t for t in extract if t[\"tipo\"] == \"Saque\" and t[\"conta\"] == conta]\n    )",
+        "peekOfCode": "def sacar(conta):\n    valor = float(input(\"Digite o valor do saque: R$ \"))\n    saldo = conta[\"saldo\"]\n    limite = LIMITE_DIARIO_PARA_SAQUE\n    numero_saques = len(\n        [t for t in extrato if t[\"tipo\"] == \"Saque\" and t[\"conta\"] == conta]\n    )\n    limite_saques = MAX_RETIRADAS\n    hoje = datetime.now().date()\n    retiradas_diarias = [",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     },
     {
-        "label": "deposito",
+        "label": "depositar",
         "kind": 2,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "def deposito():\n    conta = obter_conta()\n    if not conta:\n        return\n    valor = float(input(\"Digite o valor do depósito: R$ \"))\n    saldo = BALANCE\n    saldo += valor\n    extract.append(\n        {\n            \"tipo\": \"Depósito\",",
+        "peekOfCode": "def depositar(conta):\n    valor = float(input(\"Digite o valor do depósito: R$ \"))\n    conta[\"saldo\"] += valor\n    extrato.append(\n        {\n            \"tipo\": \"Depósito\",\n            \"valor\": valor,\n            \"data\": datetime.now().isoformat(),\n            \"conta\": conta,\n        }",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     },
@@ -137,7 +137,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "def mostrar_extrato():\n    conta = obter_conta()\n    if not conta:\n        return\n    print(\"\\n📜 Extrato Bancário 📜\\n\")\n    for transaction in extract:\n        if transaction[\"conta\"] == conta:\n            formatted_date = datetime.fromisoformat(transaction[\"data\"]).strftime(\n                \"%d/%m/%Y %H:%M:%S\"\n            )",
+        "peekOfCode": "def mostrar_extrato(conta):\n    print(\"\\n📜 Extrato Bancário 📜\\n\")\n    for transacao in extrato:\n        if transacao[\"conta\"] == conta:\n            formatted_date = datetime.fromisoformat(transacao[\"data\"]).strftime(  # noqa\n                \"%d/%m/%Y %H:%M:%S\"\n            )\n            print(\n                f\"{formatted_date} - {transacao['tipo']}: R$ {transacao['valor']:.2f}\"  # noqa\n            )",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     },
@@ -155,7 +155,16 @@
         "kind": 2,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "def listar_usuarios():\n    if not usuarios:\n        print(\"\\n\\n📭 Nenhum usuário cadastrado!\\n\\n\")\n        return\n    print(\"\\n📋 Lista de Usuários 📋\\n\")\n    for usuario in usuarios:\n        print(f\"Nome: {usuario['nome']}\")\n        print(f\"Data de Nascimento: {usuario['data_nascimento']}\")\n        print(f\"CPF: {usuario['cpf']}\")\n        print(f\"Endereço: {usuario['endereco']}\\n\")",
+        "peekOfCode": "def listar_usuarios():\n    if not usuarios:\n        print(\"\\n\\n📭 Nenhum usuário cadastrado!\\n\\n\")\n        return\n    print(\"\\n📋 Lista de Usuários 📋\\n\")\n    for usuario in usuarios:\n        print(f\"Nome: {usuario['nome']}\")\n        print(f\"Data de Nascimento: {usuario['data_nascimento']}\")\n        print(f\"CPF: {usuario['cpf']}\")\n        print(f\"Endereço: {usuario['endereco']}\")",
+        "detail": "sistema_bancario_v2",
+        "documentation": {}
+    },
+    {
+        "label": "editar_usuario",
+        "kind": 2,
+        "importPath": "sistema_bancario_v2",
+        "description": "sistema_bancario_v2",
+        "peekOfCode": "def editar_usuario():\n    cpf = (\n        input(\"Digite o CPF do usuário a ser editado (somente números): \")\n        .replace(\".\", \"\")\n        .replace(\"-\", \"\")\n        .strip()\n    )\n    usuario = next((u for u in usuarios if u[\"cpf\"] == cpf), None)\n    if not usuario:\n        print(\"\\n\\n❌ Usuário não encontrado!\\n\\n\")",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     },
@@ -173,7 +182,16 @@
         "kind": 2,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "def listar_contas():\n    if not contas:\n        print(\"\\n\\n📭 Nenhuma conta cadastrada!\\n\\n\")\n        return\n    print(\"\\n📋 Lista de Contas 📋\\n\")\n    for conta in contas:\n        print(f\"Tipo: {conta['tipo']}\")\n        print(f\"Agência: {conta['agencia']}\")\n        print(f\"Número: {conta['numero']}\")\n        print(f\"Usuário: {conta['usuario']['nome']} (CPF: {conta['usuario']['cpf']})\\n\")",
+        "peekOfCode": "def listar_contas():\n    if not contas:\n        print(\"\\n\\n📭 Nenhuma conta cadastrada!\\n\\n\")\n        return\n    print(\"\\n📋 Lista de Contas 📋\\n\")\n    for conta in contas:\n        print(f\"Tipo: {conta['tipo']}\")\n        print(f\"Agência: {conta['agencia']}\")\n        print(f\"Número: {conta['numero']}\")\n        print(",
+        "detail": "sistema_bancario_v2",
+        "documentation": {}
+    },
+    {
+        "label": "encerrar_conta",
+        "kind": 2,
+        "importPath": "sistema_bancario_v2",
+        "description": "sistema_bancario_v2",
+        "peekOfCode": "def encerrar_conta():\n    agencia = input(\"Digite a agência: \").strip()\n    numero_conta = int(input(\"Digite o número da conta: \").strip())\n    tipo_conta = input(\"Digite o tipo da conta: \").strip()\n    conta = next(\n        (\n            c\n            for c in contas\n            if c[\"agencia\"] == agencia\n            and c[\"numero\"] == numero_conta",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     },
@@ -182,34 +200,34 @@
         "kind": 2,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "def menu_principal():\n    while True:\n        option = input(\n            \"\\nBem-vindo(a) ao Banco Python!\\nEscolha uma opção:\\n\\n\"\n            \"[1] - Saque\\n[2] - Depósito\\n[3] - Extrato\\n[4] - Criar Usuário\\n[5] - Listar Usuários\\n\"\n            \"[6] - Abrir Conta\\n[7] - Listar Contas\\n[8] - Sair\\n\\n\"\n            \"Digite o número da opção desejada: \"\n        )\n        if option == \"1\":\n            saque()",
+        "peekOfCode": "def menu_principal():\n    while True:\n        option = input(\n            \"\\nBem-vindo(a) ao Banco Python!\\nEscolha uma opção:\\n\\n\"\n            \"[1] - Saque\\n[2] - Depósito\\n[3] - Extrato\\n[4] - Criar Usuário\\n[5] - Editar Usuários\\n\"  # noqa\n            \"[6] - Listar Usuários\\n[7] - Criar Conta\\n[8] - Listar Contas\\n[9] - Encerrar Conta\\n[10] - Sair\\n\\n\"  # noqa\n            \"Digite o número da opção desejada: \"\n        )\n        if option == \"1\":\n            conta = obter_conta()",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     },
     {
-        "label": "BALANCE",
+        "label": "SALDO_INICIAL",
         "kind": 5,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "BALANCE = 5000.0\nDAILY_LIMIT = 1500.0\nMAX_WITHDRAWALS = 3\nAGENCIA = \"0001\"\nTIPOS_DE_CONTA = [\n    \"Corrente\",\n    \"Poupança\",\n    \"Conta Salário\",\n    \"Conta de Investimentos\",\n    \"Conta Conjunta\",",
+        "peekOfCode": "SALDO_INICIAL = 5000.0\nLIMITE_DIARIO_PARA_SAQUE = 1500.0\nMAX_RETIRADAS = 3\nAGENCIA = \"0001\"\nTIPOS_DE_CONTA = [\n    \"Corrente\",\n    \"Poupança\",\n    \"Conta Salário\",\n    \"Conta de Investimentos\",\n    \"Conta Conjunta\",",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     },
     {
-        "label": "DAILY_LIMIT",
+        "label": "LIMITE_DIARIO_PARA_SAQUE",
         "kind": 5,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "DAILY_LIMIT = 1500.0\nMAX_WITHDRAWALS = 3\nAGENCIA = \"0001\"\nTIPOS_DE_CONTA = [\n    \"Corrente\",\n    \"Poupança\",\n    \"Conta Salário\",\n    \"Conta de Investimentos\",\n    \"Conta Conjunta\",\n    \"Conta de Menor de Idade\",",
+        "peekOfCode": "LIMITE_DIARIO_PARA_SAQUE = 1500.0\nMAX_RETIRADAS = 3\nAGENCIA = \"0001\"\nTIPOS_DE_CONTA = [\n    \"Corrente\",\n    \"Poupança\",\n    \"Conta Salário\",\n    \"Conta de Investimentos\",\n    \"Conta Conjunta\",\n    \"Conta de Menor de Idade\",",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     },
     {
-        "label": "MAX_WITHDRAWALS",
+        "label": "MAX_RETIRADAS",
         "kind": 5,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "MAX_WITHDRAWALS = 3\nAGENCIA = \"0001\"\nTIPOS_DE_CONTA = [\n    \"Corrente\",\n    \"Poupança\",\n    \"Conta Salário\",\n    \"Conta de Investimentos\",\n    \"Conta Conjunta\",\n    \"Conta de Menor de Idade\",\n    \"Conta Universitária\",",
+        "peekOfCode": "MAX_RETIRADAS = 3\nAGENCIA = \"0001\"\nTIPOS_DE_CONTA = [\n    \"Corrente\",\n    \"Poupança\",\n    \"Conta Salário\",\n    \"Conta de Investimentos\",\n    \"Conta Conjunta\",\n    \"Conta de Menor de Idade\",\n    \"Conta Universitária\",",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     },
@@ -227,25 +245,7 @@
         "kind": 5,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "TIPOS_DE_CONTA = [\n    \"Corrente\",\n    \"Poupança\",\n    \"Conta Salário\",\n    \"Conta de Investimentos\",\n    \"Conta Conjunta\",\n    \"Conta de Menor de Idade\",\n    \"Conta Universitária\",\n]\n# Variáveis globais",
-        "detail": "sistema_bancario_v2",
-        "documentation": {}
-    },
-    {
-        "label": "usuarios",
-        "kind": 5,
-        "importPath": "sistema_bancario_v2",
-        "description": "sistema_bancario_v2",
-        "peekOfCode": "usuarios = []\ncontas = []\nnumero_conta_sequencial = 1\n# Funções de validação\ndef validar_nome(nome):\n    if not nome:\n        print(\"\\n\\n❌ O nome não pode ser vazio!\\n\\n\")\n        return False\n    return True\ndef validar_data_nascimento(data_nascimento):",
-        "detail": "sistema_bancario_v2",
-        "documentation": {}
-    },
-    {
-        "label": "contas",
-        "kind": 5,
-        "importPath": "sistema_bancario_v2",
-        "description": "sistema_bancario_v2",
-        "peekOfCode": "contas = []\nnumero_conta_sequencial = 1\n# Funções de validação\ndef validar_nome(nome):\n    if not nome:\n        print(\"\\n\\n❌ O nome não pode ser vazio!\\n\\n\")\n        return False\n    return True\ndef validar_data_nascimento(data_nascimento):\n    if not data_nascimento:",
+        "peekOfCode": "TIPOS_DE_CONTA = [\n    \"Corrente\",\n    \"Poupança\",\n    \"Conta Salário\",\n    \"Conta de Investimentos\",\n    \"Conta Conjunta\",\n    \"Conta de Menor de Idade\",\n    \"Conta Universitária\",\n]\nextrato: list[dict] = []",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     },
@@ -254,7 +254,7 @@
         "kind": 5,
         "importPath": "sistema_bancario_v2",
         "description": "sistema_bancario_v2",
-        "peekOfCode": "numero_conta_sequencial = 1\n# Funções de validação\ndef validar_nome(nome):\n    if not nome:\n        print(\"\\n\\n❌ O nome não pode ser vazio!\\n\\n\")\n        return False\n    return True\ndef validar_data_nascimento(data_nascimento):\n    if not data_nascimento:\n        print(\"\\n\\n❌ A data de nascimento é obrigatória!\\n\\n\")",
+        "peekOfCode": "numero_conta_sequencial = 1\ndef validar_nome(nome):\n    if not nome:\n        print(\"\\n\\n❌ O nome não pode ser vazio!\\n\\n\")\n        return False\n    return True\ndef validar_data_nascimento(data_nascimento):\n    if not data_nascimento:\n        print(\"\\n\\n❌ A data de nascimento é obrigatória!\\n\\n\")\n        return False",
         "detail": "sistema_bancario_v2",
         "documentation": {}
     }
