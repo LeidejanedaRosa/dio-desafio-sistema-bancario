@@ -24,6 +24,14 @@
         "documentation": {}
     },
     {
+        "label": "Conta",
+        "importPath": "sistema_bancario_v3",
+        "description": "sistema_bancario_v3",
+        "isExtraImport": true,
+        "detail": "sistema_bancario_v3",
+        "documentation": {}
+    },
+    {
         "label": "ABC",
         "importPath": "abc",
         "description": "abc",
@@ -45,22 +53,6 @@
         "description": "typing",
         "isExtraImport": true,
         "detail": "typing",
-        "documentation": {}
-    },
-    {
-        "label": "menu_principal",
-        "importPath": "sistema_bancario_v2",
-        "description": "sistema_bancario_v2",
-        "isExtraImport": true,
-        "detail": "sistema_bancario_v2",
-        "documentation": {}
-    },
-    {
-        "label": "Conta",
-        "importPath": "sistema_bancario_v3",
-        "description": "sistema_bancario_v3",
-        "isExtraImport": true,
-        "detail": "sistema_bancario_v3",
         "documentation": {}
     },
     {
@@ -338,7 +330,7 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "class Saque(Transacao):\n    def __init__(self, valor):\n        self.valor = valor\n    def registrar(self, conta):\n        if conta.sacar(self.valor):\n            conta.historico.adicionar_transacao(f\"Saque de {self.valor}\")\nclass Conta:\n    numero_conta = \"001\"\n    ultima_conta_criada = \"\"\n    contas: List[\"Conta\"] = []",
+        "peekOfCode": "class Saque(Transacao):\n    def __init__(self, valor):\n        self.valor = valor\n    def registrar(self, conta):\n        if conta.sacar(self.valor):\n            conta.historico.adicionar_transacao(f\"Saque de {self.valor}\")\nclass Conta:\n    ultima_conta_criada = \"000\"\n    contas: List[\"Conta\"] = []\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", historico=None):",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -347,7 +339,16 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "class Conta:\n    numero_conta = \"001\"\n    ultima_conta_criada = \"\"\n    contas: List[\"Conta\"] = []\n    def __init__(self, cliente, numero_conta, agencia=\"0001\"):\n        self._saldo = 0\n        self._cliente = cliente\n        self._numero_conta = numero_conta\n        self._agencia = agencia\n        self._historico = Historico()",
+        "peekOfCode": "class Conta:\n    ultima_conta_criada = \"000\"\n    contas: List[\"Conta\"] = []\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", historico=None):\n        self._saldo = 0\n        self._cliente = cliente\n        self._numero_conta = numero_conta\n        self._agencia = agencia\n        self._historico = historico if historico else Historico()\n        self._data_encerramento = None",
+        "detail": "sistema_bancario_v3",
+        "documentation": {}
+    },
+    {
+        "label": "ContaFactory",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3",
+        "description": "sistema_bancario_v3",
+        "peekOfCode": "class ContaFactory:\n    @staticmethod\n    def criar_conta(usuarios):\n        documento = input(\"Digite o CPF ou CNPJ do usuário: \")\n        usuario = encontrar_usuario(usuarios, documento)\n        if usuario:\n            print(\"\\nSelecione o tipo de conta:\")\n            print(\"[1] - Pessoa Física - Corrente\")\n            print(\"[2] - Pessoa Física - Poupança\")\n            print(\"[3] - Pessoa Física - Universitária\")",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -428,16 +429,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "def validar_endereco(endereco):\n    if not endereco:\n        return False, \"❌ O endereço é obrigatório!\"\n    return True, \"\"\ndef listar_usuarios(usuarios):\n    if not usuarios:\n        print(\"\\n 🔔 Nenhum usuário cadastrado.\\n\")\n        return\n    print(\"\\n📋 Usuários cadastrados: \\n\")\n    for usuario in usuarios:",
-        "detail": "sistema_bancario_v3",
-        "documentation": {}
-    },
-    {
-        "label": "listar_usuarios",
-        "kind": 2,
-        "importPath": "sistema_bancario_v3",
-        "description": "sistema_bancario_v3",
-        "peekOfCode": "def listar_usuarios(usuarios):\n    if not usuarios:\n        print(\"\\n 🔔 Nenhum usuário cadastrado.\\n\")\n        return\n    print(\"\\n📋 Usuários cadastrados: \\n\")\n    for usuario in usuarios:\n        documento_label = \"CPF\" if \"cpf\" in usuario else \"CNPJ\"\n        documento = usuario.get(\"cpf\") or usuario.get(\"cnpj\")\n        print(\n            f\"{documento_label}: {documento}, Nome: {usuario['nome']}, Endereço: {usuario['endereco']}\"  # noqa",
+        "peekOfCode": "def validar_endereco(endereco):\n    if not endereco:\n        return False, \"❌ O endereço é obrigatório!\"\n    return True, \"\"\ndef obter_documento():\n    documento = input(\n        \"Digite o CPF ou CNPJ do usuário a ser editado (somente números): \"\n    )\n    return documento.replace(\".\", \"\").replace(\"-\", \"\").strip()\ndef encontrar_usuario(usuarios, documento):",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -500,7 +492,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "def menu_principal():\n    usuarios = Cliente.clientes\n    contas = {}\n    while True:\n        option = input(\n            \"\\nBem-vindo(a) ao Banco Python!\\nEscolha uma opção:\\n\\n\"\n            \"[1] - Saque\\n[2] - Depósito\\n[3] - Extrato\\n[4] - Criar Usuário\\n[5] - Editar Usuários\\n\"  # noqa\n            \"[6] - Listar Usuários\\n[7] - Criar Conta\\n[8] - Listar Contas\\n[9] - Encerrar Conta\\n[10] - Sair\\n\\n\"  # noqa\n            \"Digite o número da opção desejada: \"\n        )",
+        "peekOfCode": "def menu_principal():\n    usuarios = Cliente.clientes\n    contas = {}\n    while True:\n        option = input(\n            \"\\nBem-vindo(a) ao Banco Python!\\nEscolha uma opção:\\n\\n\"\n            \"[0] - Saldo\\n[1] - Saque\\n[2] - Depósito\\n[3] - Extrato\\n[4] - Criar Usuário\\n[5] - Editar Usuários\\n\"  # noqa\n            \"[6] - Listar Usuários\\n[7] - Criar Conta\\n[8] - Listar Contas\\n[9] - Encerrar Conta\\n[10] - Sair\\n\\n\"  # noqa\n            \"Digite o número da opção desejada: \"\n        )",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -509,7 +501,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "def obter_conta(contas):\n    numero = int(input(\"Digite o número da conta: \"))\n    return contas.get(numero, None)\ndef mostrar_extrato(conta):\n    print(\"\\nExtrato da conta:\")\n    for transacao in conta.historico.transacoes:\n        print(transacao)\ndef listar_contas(contas):\n    print(\"\\nContas cadastradas:\")\n    for numero, conta in contas.items():",
+        "peekOfCode": "def obter_conta(contas):\n    numero = int(input(\"Digite o número da conta: \"))\n    return contas.get(numero, None)\ndef mostrar_extrato(conta):\n    print(\"\\nExtrato da conta:\")\n    for transacao in conta.historico.transacoes:\n        print(transacao)\nmenu_principal()",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -518,25 +510,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "def mostrar_extrato(conta):\n    print(\"\\nExtrato da conta:\")\n    for transacao in conta.historico.transacoes:\n        print(transacao)\ndef listar_contas(contas):\n    print(\"\\nContas cadastradas:\")\n    for numero, conta in contas.items():\n        print(f\"Conta {numero}, Saldo: {conta.saldo()}\")\ndef encerrar_conta(contas):\n    numero = int(input(\"Digite o número da conta a ser encerrada: \"))",
-        "detail": "sistema_bancario_v3",
-        "documentation": {}
-    },
-    {
-        "label": "listar_contas",
-        "kind": 2,
-        "importPath": "sistema_bancario_v3",
-        "description": "sistema_bancario_v3",
-        "peekOfCode": "def listar_contas(contas):\n    print(\"\\nContas cadastradas:\")\n    for numero, conta in contas.items():\n        print(f\"Conta {numero}, Saldo: {conta.saldo()}\")\ndef encerrar_conta(contas):\n    numero = int(input(\"Digite o número da conta a ser encerrada: \"))\n    if numero in contas:\n        del contas[numero]\n        print(\"Conta encerrada com sucesso!\")\n    else:",
-        "detail": "sistema_bancario_v3",
-        "documentation": {}
-    },
-    {
-        "label": "encerrar_conta",
-        "kind": 2,
-        "importPath": "sistema_bancario_v3",
-        "description": "sistema_bancario_v3",
-        "peekOfCode": "def encerrar_conta(contas):\n    numero = int(input(\"Digite o número da conta a ser encerrada: \"))\n    if numero in contas:\n        del contas[numero]\n        print(\"Conta encerrada com sucesso!\")\n    else:\n        print(\"Conta não encontrada!\")\nmenu_principal()\n    \"\"\"\n    preciso verificar se menu_principal() é necessário depois da mensagem: Cadastre um usuário primeiro.",
+        "peekOfCode": "def mostrar_extrato(conta):\n    print(\"\\nExtrato da conta:\")\n    for transacao in conta.historico.transacoes:\n        print(transacao)\nmenu_principal()",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     }

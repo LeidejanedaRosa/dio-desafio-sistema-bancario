@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
 from typing import List
-from sistema_bancario_v2 import menu_principal
-from sistema_bancario_v3 import Conta
 
 
 def documento_existe(documento, clientes):
@@ -44,21 +42,6 @@ def validar_endereco(endereco):
     if not endereco:
         return False, "❌ O endereço é obrigatório!"
     return True, ""
-
-
-def listar_usuarios(usuarios):
-    if not usuarios:
-        print("\n 🔔 Nenhum usuário cadastrado.\n")
-        return
-
-    print("\n📋 Usuários cadastrados: \n")
-
-    for usuario in usuarios:
-        documento_label = "CPF" if "cpf" in usuario else "CNPJ"
-        documento = usuario.get("cpf") or usuario.get("cnpj")
-        print(
-            f"{documento_label}: {documento}, Nome: {usuario['nome']}, Endereço: {usuario['endereco']}"  # noqa
-        )
 
 
 def obter_documento():
@@ -181,24 +164,78 @@ class Saque(Transacao):
 
 
 class Conta:
-    numero_conta = "001"
-    ultima_conta_criada = ""
+    ultima_conta_criada = "000"
     contas: List["Conta"] = []
 
-    def __init__(self, cliente, numero_conta, agencia="0001"):
+    def __init__(self, cliente, numero_conta, agencia="0001", historico=None):
         self._saldo = 0
         self._cliente = cliente
         self._numero_conta = numero_conta
         self._agencia = agencia
-        self._historico = Historico()
+        self._historico = historico if historico else Historico()
+        self._data_encerramento = None
 
     @property
     def historico(self):
         return self._historico
 
+    @property
     def saldo(self):
         return self._saldo
 
+    @property
+    def data_encerramento(self):
+        return self._data_encerramento
+
+    def sacar(self, valor):
+        if valor > 0 and self._saldo >= valor:
+            self._saldo -= valor
+            self._historico.adicionar_transacao(f"Saque de {valor}")
+            return True
+        return False
+
+    def depositar(self, valor):
+        if valor > 0:
+            self._saldo += valor
+            self._historico.adicionar_transacao(f"Depósito de {valor}")
+            return True
+        return False
+
+    @classmethod
+    def listar_contas(cls):
+        if not cls.contas:
+            print("\n🔔 Nenhuma conta cadastrada.\n")
+            return
+
+        print("\n📋 Contas cadastradas:\n")
+        for conta in cls.contas:
+            print(conta)
+
+    @classmethod
+    def encerrar_conta(cls):
+        numero = input("Digite o número da conta a ser encerrada: ")
+        conta = next((c for c in cls.contas if c._numero_conta == numero), None)  # noqa
+        if conta:
+            conta._data_encerramento = datetime.now().strftime(
+                "%d/%m/%Y %H:%M:%S"
+            )  # noqa
+            print(
+                f"\n 🔔 Conta {numero} encerrada com sucesso em {conta._data_encerramento}! \n"  # noqa
+            )
+        else:
+            print("\n ❌ Conta não encontrada! \n")
+
+    def __str__(self):
+        documento = self._cliente.get("cpf") or self._cliente.get("cnpj")
+        encerramento = (
+            f", Encerrada em: {self._data_encerramento}"
+            if self._data_encerramento
+            else ""
+        )
+        return f"Cliente: {documento}, Agência: {self._agencia}, Conta: {self._numero_conta}, Saldo: {self._saldo}{encerramento}"  # noqa
+
+
+class ContaFactory:
     @staticmethod
     def criar_conta(usuarios):
         documento = input("Digite o CPF ou CNPJ do usuário: ")
@@ -217,32 +254,27 @@ class Conta:
             print("[8] - Jurídica - Poupança")
             tipo_conta = input("Digite o número da opção desejada: ")
 
-            novo_numero_conta = Conta._gerar_numero_conta()
+            novo_numero_conta = ContaFactory._gerar_numero_conta()
 
-            numero_conta_formatado = Conta._formatar_numero_conta(
+            numero_conta_formatado = ContaFactory._formatar_numero_conta(
                 tipo_conta, novo_numero_conta
             )  # noqa
             conta = Conta(usuario, numero_conta_formatado)
 
-            Conta.contas.append(conta)  # Armazena a instância da conta
+            Conta.contas.append(conta)
             Cliente.adicionar_conta(usuario, conta)
 
-            print("Conta criada com sucesso!")
+            print("\n✅ Conta criada com sucesso!\n")
         else:
             print("\n 🔔 Usuário não encontrado! Cadastre-o primeiro.\n")
-            menu_principal()
 
     @staticmethod
     def _gerar_numero_conta():
-        nova_conta = (
-            Conta.numero_conta
-            if Conta.ultima_conta_criada != ""
-            else int(Conta.ultima_conta_criada) + 1
-        )  # noqa
+        nova_conta = int(Conta.ultima_conta_criada) + 1
 
-        Conta.ultima_conta_criada = str(nova_conta)
+        Conta.ultima_conta_criada = str(nova_conta).zfill(3)
 
-        return str(nova_conta)
+        return Conta.ultima_conta_criada
 
     @staticmethod
     def _formatar_numero_conta(tipo_conta: str, numero_conta: str):
@@ -256,21 +288,7 @@ class Conta:
             "7": "7",  # Jurídica - Corrente
             "8": "8",  # Jurídica - Poupança
         }
-        return f"{numero_conta.zfill(3)}/{tipo_conta_map[tipo_conta]}"
-
-    def sacar(self, valor):
-        if valor > 0 and self._saldo >= valor:
-            self._saldo -= valor
-            self._historico.adicionar_transacao(f"Saque de {valor}")
-            return True
-        return False
-
-    def depositar(self, valor):
-        if valor > 0:
-            self._saldo += valor
-            self._historico.adicionar_transacao(f"Depósito de {valor}")
-            return True
-        return False
+        return f"{numero_conta}/{tipo_conta_map[tipo_conta]}"
 
 
 class ContaCorrente(Conta):
@@ -309,13 +327,26 @@ class Cliente:
             print("\n 🔔 Nenhum usuário cadastrado.\n")
             return
 
-        print("\n📋 Usuários cadastrados: \n")
+        print("\n📋 Usuários cadastrados:")
 
         for usuario in cls.clientes:
             documento_label = "CPF" if "cpf" in usuario else "CNPJ"
             documento = usuario.get("cpf") or usuario.get("cnpj")
+
+            data_label = (
+                "Data de Nascimento" if "cpf" in usuario else "Data de Abertura"  # noqa
+            )  # noqa
+            data = usuario.get("data_nascimento", usuario.get("data_abertura"))
+
+            contas = usuario.get("contas", [])
+            contas_str = (
+                "\n ".join(str(conta) for conta in contas)
+                if contas
+                else "Nenhuma conta cadastrada!"
+            )
+
             print(
-                f"{documento_label}: {documento}, Nome: {usuario['nome']}, Endereço: {usuario['endereco']}"  # noqa
+                f"\n {documento_label}: {documento},\n Nome: {usuario['nome']},\n {data_label}: {data},\n Endereço: {usuario['endereco']}, \n Conta(s): \n {contas_str}"  # noqa
             )
 
     @classmethod
@@ -385,12 +416,17 @@ def menu_principal():
     while True:
         option = input(
             "\nBem-vindo(a) ao Banco Python!\nEscolha uma opção:\n\n"
-            "[1] - Saque\n[2] - Depósito\n[3] - Extrato\n[4] - Criar Usuário\n[5] - Editar Usuários\n"  # noqa
+            "[0] - Saldo\n[1] - Saque\n[2] - Depósito\n[3] - Extrato\n[4] - Criar Usuário\n[5] - Editar Usuários\n"  # noqa
             "[6] - Listar Usuários\n[7] - Criar Conta\n[8] - Listar Contas\n[9] - Encerrar Conta\n[10] - Sair\n\n"  # noqa
             "Digite o número da opção desejada: "
         )
 
-        if option == "1":
+        if option == "0":
+            conta = obter_conta(contas)
+            if conta:
+                print(f"\nSaldo: {conta.saldo}\n")
+
+        elif option == "1":
             conta = obter_conta(contas)
             if conta:
                 valor = float(input("Digite o valor do saque: "))
@@ -477,15 +513,13 @@ def menu_principal():
             Cliente.listar_usuarios()
 
         elif option == "7":
-            Conta.criar_conta(usuarios)
+            ContaFactory.criar_conta(usuarios)
 
         elif option == "8":
-            pass
-            # listar_contas(contas)
+            Conta.listar_contas()
 
         elif option == "9":
-            pass
-            # encerrar_conta(contas)
+            Conta.encerrar_conta()
 
         elif option == "10":
             print("\n\n👋 Obrigado por usar o Banco Python! Até mais!\n\n")
@@ -505,24 +539,4 @@ def mostrar_extrato(conta):
         print(transacao)
 
 
-def listar_contas(contas):
-    print("\nContas cadastradas:")
-    for numero, conta in contas.items():
-        print(f"Conta {numero}, Saldo: {conta.saldo()}")
-
-
-def encerrar_conta(contas):
-    numero = int(input("Digite o número da conta a ser encerrada: "))
-    if numero in contas:
-        del contas[numero]
-        print("Conta encerrada com sucesso!")
-    else:
-        print("Conta não encontrada!")
-
-
 menu_principal()
-    """
-    preciso verificar se menu_principal() é necessário depois da mensagem: Cadastre um usuário primeiro.
-    Testar a criação de Conta
-    conferir se precisa refatorar o código de criar conta
-()    """
