@@ -1,3 +1,4 @@
+import re
 from abc import ABC, abstractmethod
 from datetime import datetime
 from typing import List
@@ -41,6 +42,15 @@ def validar_data(data):
 def validar_endereco(endereco):
     if not endereco:
         return False, "❌ O endereço é obrigatório!"
+    return True, ""
+
+
+def validar_numero_conta(numero):
+    if not re.match(r"^\d{3}/\d$", numero):
+        return (
+            False,
+            "❌ Formato de número de conta inválido! Use o formato xxx/x.",
+        )  # noqa
     return True, ""
 
 
@@ -151,7 +161,10 @@ class Deposito(Transacao):
 
     def registrar(self, conta):
         if conta.depositar(self.valor):
-            conta.historico.adicionar_transacao(f"Depósito de {self.valor}")
+            data_hora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+            conta.historico.adicionar_transacao(
+                f"{data_hora} + R$ {self.valor:.2f}"
+            )  # noqa
 
 
 class Saque(Transacao):
@@ -160,10 +173,13 @@ class Saque(Transacao):
 
     def registrar(self, conta):
         if conta.sacar(self.valor):
-            conta.historico.adicionar_transacao(f"Saque de {self.valor}")
+            data_hora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+            conta.historico.adicionar_transacao(
+                f"{data_hora} - R$ {self.valor:.2f}"
+            )  # noqa
 
 
-class Conta:
+class Conta(ABC):
     ultima_conta_criada = "000"
     contas: List["Conta"] = []
 
@@ -187,19 +203,72 @@ class Conta:
     def data_encerramento(self):
         return self._data_encerramento
 
+    def verificar_conta_ativa(self):
+        if self._data_encerramento:
+            print(
+                "\n❌ Esta conta está encerrada e não pode realizar operações.\n"  # noqa
+            )  # noqa
+            return False
+        return True
+
+    def exibir_saldo(self):
+        if not self.verificar_conta_ativa():
+            return
+
+        print(f"\n 🔔 Saldo: R$ {self.saldo:.2f}\n")
+
     def sacar(self, valor):
+        if not self.verificar_conta_ativa():
+            return
+
         if valor > 0 and self._saldo >= valor:
             self._saldo -= valor
-            self._historico.adicionar_transacao(f"Saque de {valor}")
+            print(f"\n ✅ Saque de R$ {valor:.2f} realizado com sucesso! \n")
+            return True
+        else:
+            print("\n❌ Saldo insuficiente para realizar o saque.\n")
+        return False
+
+    @abstractmethod
+    def deposito_inicial(self) -> float:
+        pass
+
+    def depositar(self, valor):
+        if not self.verificar_conta_ativa():
+            return
+
+        if valor > 0:
+            self._saldo += valor
+            print(f"\n✅ Depósito de R$ {valor:.2f} realizado com sucesso!\n")
             return True
         return False
 
-    def depositar(self, valor):
-        if valor > 0:
-            self._saldo += valor
-            self._historico.adicionar_transacao(f"Depósito de {valor}")
-            return True
-        return False
+    def exibir_extrato(self):
+        if not self.verificar_conta_ativa():
+            return
+
+        print("\n📋 Extrato de Transações 📋\n")
+        if not self._historico.transacoes:
+            print("🔔 Nenhuma transação realizada.")
+        else:
+            print(f"Agência: {self._agencia}, Conta: {self._numero_conta}\n")
+            for transacao in self._historico.transacoes:
+                print(transacao)
+        print(f"\n🔔 Saldo Atual: R$ {self.saldo:.2f}\n")
+
+    @classmethod
+    def obter_conta(cls):
+        numero = input("Digite o número da conta: ")
+
+        valido, mensagem = validar_numero_conta(numero)
+        if not valido:
+            print(f"\n{mensagem}\n")
+            return None
+
+        conta = next((c for c in cls.contas if c._numero_conta == numero), None)  # noqa
+        if not conta:
+            print("\n❌ Conta não encontrada!\n")
+        return conta
 
     @classmethod
     def listar_contas(cls):
@@ -214,6 +283,12 @@ class Conta:
     @classmethod
     def encerrar_conta(cls):
         numero = input("Digite o número da conta a ser encerrada: ")
+
+        valido, mensagem = validar_numero_conta(numero)
+        if not valido:
+            print(f"\n{mensagem}\n")
+            return None
+
         conta = next((c for c in cls.contas if c._numero_conta == numero), None)  # noqa
         if conta:
             conta._data_encerramento = datetime.now().strftime(
@@ -232,72 +307,275 @@ class Conta:
             if self._data_encerramento
             else ""
         )
-        return f"Cliente: {documento}, Agência: {self._agencia}, Conta: {self._numero_conta}, Saldo: {self._saldo}{encerramento}"  # noqa
+
+        return f"Cliente: {documento}, {co_titular} Agência: {self._agencia}, Conta: {self._numero_conta}, Saldo: R$ {self._saldo:.2f}, {encerramento}"  # noqa
 
 
 class ContaFactory:
     @staticmethod
     def criar_conta(usuarios):
-        documento = input("Digite o CPF ou CNPJ do usuário: ")
-
+        documento = ContaFactory._obter_documento_usuario()
         usuario = encontrar_usuario(usuarios, documento)
 
-        if usuario:
-            print("\nSelecione o tipo de conta:")
-            print("[1] - Pessoa Física - Corrente")
-            print("[2] - Pessoa Física - Poupança")
-            print("[3] - Pessoa Física - Universitária")
-            print("[4] - Pessoa Física - Conta Salário")
-            print("[5] - Pessoa Física - Conta Conjunta")
-            print("[6] - Pessoa Física - Conta Menor de Idade")
-            print("[7] - Jurídica - Corrente")
-            print("[8] - Jurídica - Poupança")
-            tipo_conta = input("Digite o número da opção desejada: ")
-
-            novo_numero_conta = ContaFactory._gerar_numero_conta()
-
-            numero_conta_formatado = ContaFactory._formatar_numero_conta(
-                tipo_conta, novo_numero_conta
-            )  # noqa
-            conta = Conta(usuario, numero_conta_formatado)
-
-            Conta.contas.append(conta)
-            Cliente.adicionar_conta(usuario, conta)
-
-            print("\n✅ Conta criada com sucesso!\n")
-        else:
+        if not usuario:
             print("\n 🔔 Usuário não encontrado! Cadastre-o primeiro.\n")
+            return
+
+        tipo_conta = ContaFactory._selecionar_tipo_conta(usuario)
+        co_titular = None
+
+        if tipo_conta == "5":  # Conta Conjunta
+            co_titular_documento = input("Digite o CPF do cônjuge: ")
+            co_titular = encontrar_usuario(usuarios, co_titular_documento)
+            if not co_titular:
+                print("\n❌ Cônjuge não encontrado! Cadastre-o primeiro.\n")
+                return
+            conta = ContaFactory._criar_instancia_conta(
+                tipo_conta, usuario, co_titular
+            )  # noqa
+            conta = ContaFactory._criar_instancia_conta(tipo_conta, usuario)
+        else:
+            conta = ContaFactory._criar_instancia_conta(tipo_conta, usuario)
+
+        if not conta:
+            print("\n❌ Tipo de conta inválido! Tente novamente.\n")
+            return
+
+        ContaFactory._realizar_deposito_inicial(conta)
+        Conta.contas.append(conta)
+        Cliente.adicionar_conta(usuario, conta)
+        if tipo_conta == "5":  # Conta Conjunta
+            Cliente.adicionar_conta(co_titular, conta)
+        print("\n✅ Conta criada com sucesso!\n")
+
+    @staticmethod
+    def _obter_documento_usuario():
+        return input("Digite o CPF ou CNPJ do usuário: ")
+
+    @staticmethod
+    def _selecionar_tipo_conta(usuario):
+        tipos_conta = {
+            "1": "Pessoa Física - Corrente",
+            "2": "Pessoa Física - Poupança",
+            "3": "Pessoa Física - Universitária",
+            "4": "Pessoa Física - Conta Salário",
+            "5": "Pessoa Física - Conta Conjunta",
+            "6": "Pessoa Física - Conta Menor de Idade",
+            "7": "Jurídica - Corrente",
+            "8": "Jurídica - Poupança",
+        }
+
+        # Verificar idade do usuário se for Pessoa Física
+        if "cpf" in usuario:
+            data_nascimento = datetime.strptime(
+                usuario["data_nascimento"], "%d/%m/%Y"
+            )  # noqa
+            idade = (datetime.now() - data_nascimento).days // 365
+
+            if idade < 18:
+                print("\nUsuário menor de idade. Verificando responsável...\n")
+                responsavel = ContaFactory._obter_responsavel()
+                if not responsavel:
+                    print(
+                        "\n❌ Nenhum responsável encontrado com conta ativa!\n"
+                    )  # noqa
+                    return None
+                print("\nResponsável encontrado. Continuando...\n")
+                tipos_conta = {"6": "Pessoa Física - Conta Menor de Idade"}
+            else:
+                tipos_conta = {
+                    "1": "Pessoa Física - Corrente",
+                    "2": "Pessoa Física - Poupança",
+                    "3": "Pessoa Física - Universitária",
+                    "4": "Pessoa Física - Conta Salário",
+                    "5": "Pessoa Física - Conta Conjunta",
+                }
+        else:
+            tipos_conta = {
+                "7": "Jurídica - Corrente",
+                "8": "Jurídica - Poupança",
+            }
+
+        # Remover tipos de conta que o usuário já possui
+        contas_usuario = [
+            conta._numero_conta.split("/")[1]
+            for conta in Conta.contas
+            if conta._cliente == usuario
+        ]
+        tipos_conta = {
+            key: value
+            for key, value in tipos_conta.items()
+            if key not in contas_usuario
+        }
+
+        if not tipos_conta:
+            print("\n❌ Usuário já possui todas as contas possíveis.\n")
+            return None
+
+        print("\nSelecione o tipo de conta:")
+        for key, value in tipos_conta.items():
+            print(f"[{key}] - {value}")
+
+        tipo_conta = input("\nDigite o número da opção desejada: ")
+        if tipo_conta not in tipos_conta:
+            print("\n❌ Tipo de conta inválido! Tente novamente.\n")
+            return None
+
+        return tipo_conta
+
+    @staticmethod
+    def _obter_responsavel():
+        documento_responsavel = input("Digite o CPF do responsável: ")
+        responsavel = encontrar_usuario(Cliente.clientes, documento_responsavel)  # noqa
+        if responsavel:
+            conta_responsavel = next(
+                (
+                    conta
+                    for conta in Conta.contas
+                    if conta._cliente == responsavel
+                    and not conta._data_encerramento  # noqa
+                ),
+                None,
+            )
+            if conta_responsavel:
+                return responsavel
+        return None
+
+    @staticmethod
+    def _criar_instancia_conta(tipo_conta, usuario, co_titular=None):
+        novo_numero_conta = ContaFactory._gerar_numero_conta()
+        numero_conta_formatado = ContaFactory._formatar_numero_conta(
+            tipo_conta, novo_numero_conta
+        )
+
+        conta_classes = {
+            "1": ContaCorrente,
+            "2": ContaPoupanca,
+            "3": ContaUniversitaria,
+            "4": ContaSalario,
+            "5": ContaConjunta,
+            "6": ContaMenorIdade,
+            "7": ContaJuridicaCorrente,
+            "8": ContaJuridicaPoupanca,
+        }
+
+        conta_class = conta_classes.get(tipo_conta)
+        if conta_class:
+            if tipo_conta == "5":  # Conta Conjunta
+                return conta_class(
+                    usuario, numero_conta_formatado, co_titular=co_titular
+                )
+            return conta_class(usuario, numero_conta_formatado)
+        return None
+
+    @staticmethod
+    def _realizar_deposito_inicial(conta):
+        valor_deposito_inicial = conta.deposito_inicial()
+
+        if valor_deposito_inicial == 0:
+            return
+
+        print(
+            f"\n 🔔 Para que a conta criada possa ser ativada é necessário um depósito inicial de R$ {valor_deposito_inicial:.2f} \n"  # noqa
+        )
+
+        while True:
+            valor_deposito = float(
+                input("-> Digite o valor do depósito inicial: R$ ")
+            )  # noqa
+            if valor_deposito >= valor_deposito_inicial:
+                conta.depositar(valor_deposito)
+                break
+            else:
+                print(
+                    f"\n❌ O valor do depósito inicial deve ser de pelo menos R$ {valor_deposito_inicial:.2f}!\n"  # noqa
+                )
 
     @staticmethod
     def _gerar_numero_conta():
         nova_conta = int(Conta.ultima_conta_criada) + 1
-
         Conta.ultima_conta_criada = str(nova_conta).zfill(3)
-
         return Conta.ultima_conta_criada
 
     @staticmethod
     def _formatar_numero_conta(tipo_conta: str, numero_conta: str):
-        tipo_conta_map = {
-            "1": "1",  # Pessoa Física - Corrente
-            "2": "2",  # Pessoa Física - Poupança
-            "3": "3",  # Pessoa Física - Universitária
-            "4": "4",  # Pessoa Física - Conta Salário
-            "5": "5",  # Pessoa Física - Conta Conjunta
-            "6": "6",  # Pessoa Física - Conta Menor de Idade
-            "7": "7",  # Jurídica - Corrente
-            "8": "8",  # Jurídica - Poupança
-        }
-        return f"{numero_conta}/{tipo_conta_map[tipo_conta]}"
+        return f"{numero_conta}/{tipo_conta}"
 
 
 class ContaCorrente(Conta):
     def __init__(
-        self, cliente, numero_conta, agencia="0001", limite=0, limite_saques=0
+        self, cliente, numero_conta, agencia="0001", limite=1500, limite_saques=3
     ):
         super().__init__(cliente, numero_conta, agencia)
         self._limite = limite
         self._limite_saques = limite_saques
+
+    def deposito_inicial(self):
+        return 100
+
+
+class ContaPoupanca(Conta):
+    def __init__(self, cliente, numero_conta, agencia="0001"):
+        super().__init__(cliente, numero_conta, agencia)
+
+    def deposito_inicial(self):
+        return 50
+
+
+class ContaUniversitaria(Conta):
+    def __init__(self, cliente, numero_conta, agencia="0001", limite=500):
+        super().__init__(cliente, numero_conta, agencia)
+        self._limite = limite
+
+    def deposito_inicial(self):
+        return 20
+
+
+class ContaSalario(Conta):
+    def __init__(self, cliente, numero_conta, agencia="0001"):
+        super().__init__(cliente, numero_conta, agencia)
+
+    def deposito_inicial(self):
+        return 0
+
+
+class ContaConjunta(Conta):
+    def __init__(self, cliente, numero_conta, agencia="0001", co_titular=None):
+        super().__init__(cliente, numero_conta, agencia)
+        self._co_titular = co_titular
+
+    def deposito_inicial(self):
+        return 100
+
+    @property
+    def co_titular(self):
+        return self._co_titular
+
+
+class ContaMenorIdade(Conta):
+    def __init__(self, cliente, numero_conta, agencia="0001", responsavel=None):
+        super().__init__(cliente, numero_conta, agencia)
+        self._responsavel = responsavel
+
+    def deposito_inicial(self):
+        return 10
+
+
+class ContaJuridicaCorrente(Conta):
+    def __init__(self, cliente, numero_conta, agencia="0001", limite=1000):
+        super().__init__(cliente, numero_conta, agencia)
+        self._limite = limite
+
+    def deposito_inicial(self):
+        return 200
+
+
+class ContaJuridicaPoupanca(Conta):
+    def __init__(self, cliente, numero_conta, agencia="0001"):
+        super().__init__(cliente, numero_conta, agencia)
+
+    def deposito_inicial(self):
+        return 150
 
 
 class Cliente:
@@ -315,7 +593,8 @@ class Cliente:
             ) == usuario.get("cnpj"):
                 if "contas" not in cliente:
                     cliente["contas"] = []
-                cliente["contas"].append(conta)
+                if conta not in cliente["contas"]:
+                    cliente["contas"].append(conta)
                 break
 
     def realizar_transacao(self, conta, transacao: Transacao):
@@ -411,7 +690,6 @@ class PessoaJuridica(Cliente):
 
 def menu_principal():
     usuarios = Cliente.clientes
-    contas = {}
 
     while True:
         option = input(
@@ -422,105 +700,25 @@ def menu_principal():
         )
 
         if option == "0":
-            conta = obter_conta(contas)
-            if conta:
-                print(f"\nSaldo: {conta.saldo}\n")
-
+            exibir_saldo()
         elif option == "1":
-            conta = obter_conta(contas)
-            if conta:
-                valor = float(input("Digite o valor do saque: "))
-                transacao = Saque(valor)
-                transacao.registrar(conta)
-
+            realizar_saque()
         elif option == "2":
-            conta = obter_conta(contas)
-            if conta:
-                valor = float(input("Digite o valor do depósito: "))
-                transacao = Deposito(valor)
-                transacao.registrar(conta)
-
+            realizar_deposito()
         elif option == "3":
-            conta = obter_conta(contas)
-            if conta:
-                mostrar_extrato(conta)
-
+            exibir_extrato()
         elif option == "4":
-            while True:
-                documento = input("Digite o CPF ou CNPJ do usuário: ")
-
-                valido, mensagem = validar_documento(documento)
-                if not valido:
-                    print(f"\n{mensagem}\n")
-                    continue
-
-                break
-
-            if documento_existe(documento, usuarios):
-                if len(documento) == 11:
-                    print("\n❌ CPF já cadastrado!\n")
-                else:
-                    print("\n❌ CNPJ já cadastrado!\n")
-
-                menu_principal()
-
-            while True:
-                nome = input("Digite o nome: ")
-                valido, mensagem = validar_nome(nome)
-                if valido:
-                    break
-                print(f"\n{mensagem}\n")
-
-            while True:
-                if len(documento) == 11:
-                    data = input("Digite a data de nascimento (dd/mm/aaaa): ")
-                else:
-                    data = input("Digite a data de abertura (dd/mm/aaaa): ")
-
-                valido, mensagem = validar_data(data)
-                if valido:
-                    break
-                print(f"\n{mensagem}\n")
-
-            while True:
-                endereco = input("Digite o endereço: ")
-                valido, mensagem = validar_endereco(endereco)
-                if valido:
-                    break
-                print(f"\n{mensagem}\n")
-
-            if len(documento) == 11:
-                PessoaFisica(
-                    nome=nome,
-                    cpf=documento,
-                    endereco=endereco,
-                    data_nascimento=data,
-                )
-            else:
-                PessoaJuridica(
-                    nome=nome,
-                    cnpj=documento,
-                    endereco=endereco,
-                    data_abertura=data,
-                )
-
-            print("Usuário criado com sucesso!")
-
+            criar_usuario(usuarios)
         elif option == "5":
             Cliente.editar_usuario()
-
         elif option == "6":
             Cliente.listar_usuarios()
-
         elif option == "7":
             ContaFactory.criar_conta(usuarios)
-
         elif option == "8":
             Conta.listar_contas()
-
         elif option == "9":
             Conta.encerrar_conta()
-
         elif option == "10":
             print("\n\n👋 Obrigado por usar o Banco Python! Até mais!\n\n")
             break
@@ -528,15 +726,94 @@ def menu_principal():
             print("\n\n❌ Opção inválida! Tente novamente.\n\n")
 
 
-def obter_conta(contas):
-    numero = int(input("Digite o número da conta: "))
-    return contas.get(numero, None)
+def exibir_saldo():
+    conta = Conta.obter_conta()
+    if conta:
+        conta.exibir_saldo()
 
 
-def mostrar_extrato(conta):
-    print("\nExtrato da conta:")
-    for transacao in conta.historico.transacoes:
-        print(transacao)
+def realizar_saque():
+    conta = Conta.obter_conta()
+    if conta:
+        valor = float(input("Digite o valor do saque: R$ "))
+        transacao = Saque(valor)
+        transacao.registrar(conta)
+
+
+def realizar_deposito():
+    conta = Conta.obter_conta()
+    if conta:
+        valor = float(input("Digite o valor do depósito: R$ "))
+        transacao = Deposito(valor)
+        transacao.registrar(conta)
+
+
+def exibir_extrato():
+    conta = Conta.obter_conta()
+    if conta:
+        conta.exibir_extrato()
+
+
+def criar_usuario(usuarios):
+    while True:
+        documento = input("Digite o CPF ou CNPJ do usuário: ")
+
+        valido, mensagem = validar_documento(documento)
+        if not valido:
+            print(f"\n{mensagem}\n")
+            continue
+
+        break
+
+    if documento_existe(documento, usuarios):
+        if len(documento) == 11:
+            print("\n❌ CPF já cadastrado!\n")
+        else:
+            print("\n❌ CNPJ já cadastrado!\n")
+
+        return
+
+    while True:
+        nome = input("Digite o nome: ")
+        valido, mensagem = validar_nome(nome)
+        if valido:
+            break
+        print(f"\n{mensagem}\n")
+
+    while True:
+        if len(documento) == 11:
+            data = input("Digite a data de nascimento (dd/mm/aaaa): ")
+        else:
+            data = input("Digite a data de abertura (dd/mm/aaaa): ")
+
+        valido, mensagem = validar_data(data)
+        if valido:
+            break
+        print(f"\n{mensagem}\n")
+
+    while True:
+        endereco = input("Digite o endereço: ")
+        valido, mensagem = validar_endereco(endereco)
+        if valido:
+            break
+        print(f"\n{mensagem}\n")
+
+    if len(documento) == 11:
+        PessoaFisica(
+            nome=nome,
+            cpf=documento,
+            endereco=endereco,
+            data_nascimento=data,
+        )
+    else:
+        PessoaJuridica(
+            nome=nome,
+            cnpj=documento,
+            endereco=endereco,
+            data_abertura=data,
+        )
+
+    print("Usuário criado com sucesso!")
 
 
 menu_principal()

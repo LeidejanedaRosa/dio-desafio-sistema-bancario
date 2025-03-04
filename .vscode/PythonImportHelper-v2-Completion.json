@@ -24,11 +24,12 @@
         "documentation": {}
     },
     {
-        "label": "Conta",
-        "importPath": "sistema_bancario_v3",
-        "description": "sistema_bancario_v3",
+        "label": "re",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "sistema_bancario_v3",
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
         "documentation": {}
     },
     {
@@ -312,7 +313,7 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "class Transacao(ABC):\n    @abstractmethod\n    def registrar(self, conta):\n        pass\nclass Deposito(Transacao):\n    def __init__(self, valor):\n        self.valor = valor\n    def registrar(self, conta):\n        if conta.depositar(self.valor):\n            conta.historico.adicionar_transacao(f\"Depósito de {self.valor}\")",
+        "peekOfCode": "class Transacao(ABC):\n    @abstractmethod\n    def registrar(self, conta):\n        pass\nclass Deposito(Transacao):\n    def __init__(self, valor):\n        self.valor = valor\n    def registrar(self, conta):\n        if conta.depositar(self.valor):\n            data_hora = datetime.now().strftime(\"%d/%m/%Y %H:%M:%S\")",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -321,7 +322,7 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "class Deposito(Transacao):\n    def __init__(self, valor):\n        self.valor = valor\n    def registrar(self, conta):\n        if conta.depositar(self.valor):\n            conta.historico.adicionar_transacao(f\"Depósito de {self.valor}\")\nclass Saque(Transacao):\n    def __init__(self, valor):\n        self.valor = valor\n    def registrar(self, conta):",
+        "peekOfCode": "class Deposito(Transacao):\n    def __init__(self, valor):\n        self.valor = valor\n    def registrar(self, conta):\n        if conta.depositar(self.valor):\n            data_hora = datetime.now().strftime(\"%d/%m/%Y %H:%M:%S\")\n            conta.historico.adicionar_transacao(\n                f\"{data_hora} + R$ {self.valor:.2f}\"\n            )  # noqa\nclass Saque(Transacao):",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -330,7 +331,7 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "class Saque(Transacao):\n    def __init__(self, valor):\n        self.valor = valor\n    def registrar(self, conta):\n        if conta.sacar(self.valor):\n            conta.historico.adicionar_transacao(f\"Saque de {self.valor}\")\nclass Conta:\n    ultima_conta_criada = \"000\"\n    contas: List[\"Conta\"] = []\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", historico=None):",
+        "peekOfCode": "class Saque(Transacao):\n    def __init__(self, valor):\n        self.valor = valor\n    def registrar(self, conta):\n        if conta.sacar(self.valor):\n            data_hora = datetime.now().strftime(\"%d/%m/%Y %H:%M:%S\")\n            conta.historico.adicionar_transacao(\n                f\"{data_hora} - R$ {self.valor:.2f}\"\n            )  # noqa\nclass Conta(ABC):",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -339,7 +340,7 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "class Conta:\n    ultima_conta_criada = \"000\"\n    contas: List[\"Conta\"] = []\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", historico=None):\n        self._saldo = 0\n        self._cliente = cliente\n        self._numero_conta = numero_conta\n        self._agencia = agencia\n        self._historico = historico if historico else Historico()\n        self._data_encerramento = None",
+        "peekOfCode": "class Conta(ABC):\n    ultima_conta_criada = \"000\"\n    contas: List[\"Conta\"] = []\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", historico=None):\n        self._saldo = 0\n        self._cliente = cliente\n        self._numero_conta = numero_conta\n        self._agencia = agencia\n        self._historico = historico if historico else Historico()\n        self._data_encerramento = None",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -348,7 +349,7 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "class ContaFactory:\n    @staticmethod\n    def criar_conta(usuarios):\n        documento = input(\"Digite o CPF ou CNPJ do usuário: \")\n        usuario = encontrar_usuario(usuarios, documento)\n        if usuario:\n            print(\"\\nSelecione o tipo de conta:\")\n            print(\"[1] - Pessoa Física - Corrente\")\n            print(\"[2] - Pessoa Física - Poupança\")\n            print(\"[3] - Pessoa Física - Universitária\")",
+        "peekOfCode": "class ContaFactory:\n    @staticmethod\n    def criar_conta(usuarios):\n        documento = ContaFactory._obter_documento_usuario()\n        usuario = encontrar_usuario(usuarios, documento)\n        if not usuario:\n            print(\"\\n 🔔 Usuário não encontrado! Cadastre-o primeiro.\\n\")\n            return\n        tipo_conta = ContaFactory._selecionar_tipo_conta(usuario)\n        co_titular = None",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -357,7 +358,70 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "class ContaCorrente(Conta):\n    def __init__(\n        self, cliente, numero_conta, agencia=\"0001\", limite=0, limite_saques=0\n    ):\n        super().__init__(cliente, numero_conta, agencia)\n        self._limite = limite\n        self._limite_saques = limite_saques\nclass Cliente:\n    clientes: list[dict] = []\n    def __init__(self, endereco):",
+        "peekOfCode": "class ContaCorrente(Conta):\n    def __init__(\n        self, cliente, numero_conta, agencia=\"0001\", limite=1500, limite_saques=3\n    ):\n        super().__init__(cliente, numero_conta, agencia)\n        self._limite = limite\n        self._limite_saques = limite_saques\n    def deposito_inicial(self):\n        return 100\nclass ContaPoupanca(Conta):",
+        "detail": "sistema_bancario_v3",
+        "documentation": {}
+    },
+    {
+        "label": "ContaPoupanca",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3",
+        "description": "sistema_bancario_v3",
+        "peekOfCode": "class ContaPoupanca(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\"):\n        super().__init__(cliente, numero_conta, agencia)\n    def deposito_inicial(self):\n        return 50\nclass ContaUniversitaria(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", limite=500):\n        super().__init__(cliente, numero_conta, agencia)\n        self._limite = limite\n    def deposito_inicial(self):",
+        "detail": "sistema_bancario_v3",
+        "documentation": {}
+    },
+    {
+        "label": "ContaUniversitaria",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3",
+        "description": "sistema_bancario_v3",
+        "peekOfCode": "class ContaUniversitaria(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", limite=500):\n        super().__init__(cliente, numero_conta, agencia)\n        self._limite = limite\n    def deposito_inicial(self):\n        return 20\nclass ContaSalario(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\"):\n        super().__init__(cliente, numero_conta, agencia)\n    def deposito_inicial(self):",
+        "detail": "sistema_bancario_v3",
+        "documentation": {}
+    },
+    {
+        "label": "ContaSalario",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3",
+        "description": "sistema_bancario_v3",
+        "peekOfCode": "class ContaSalario(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\"):\n        super().__init__(cliente, numero_conta, agencia)\n    def deposito_inicial(self):\n        return 0\nclass ContaConjunta(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", co_titular=None):\n        super().__init__(cliente, numero_conta, agencia)\n        self._co_titular = co_titular\n    def deposito_inicial(self):",
+        "detail": "sistema_bancario_v3",
+        "documentation": {}
+    },
+    {
+        "label": "ContaConjunta",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3",
+        "description": "sistema_bancario_v3",
+        "peekOfCode": "class ContaConjunta(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", co_titular=None):\n        super().__init__(cliente, numero_conta, agencia)\n        self._co_titular = co_titular\n    def deposito_inicial(self):\n        return 100\n    @property\n    def co_titular(self):\n        return self._co_titular\nclass ContaMenorIdade(Conta):",
+        "detail": "sistema_bancario_v3",
+        "documentation": {}
+    },
+    {
+        "label": "ContaMenorIdade",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3",
+        "description": "sistema_bancario_v3",
+        "peekOfCode": "class ContaMenorIdade(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", responsavel=None):\n        super().__init__(cliente, numero_conta, agencia)\n        self._responsavel = responsavel\n    def deposito_inicial(self):\n        return 10\nclass ContaJuridicaCorrente(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", limite=1000):\n        super().__init__(cliente, numero_conta, agencia)\n        self._limite = limite",
+        "detail": "sistema_bancario_v3",
+        "documentation": {}
+    },
+    {
+        "label": "ContaJuridicaCorrente",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3",
+        "description": "sistema_bancario_v3",
+        "peekOfCode": "class ContaJuridicaCorrente(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", limite=1000):\n        super().__init__(cliente, numero_conta, agencia)\n        self._limite = limite\n    def deposito_inicial(self):\n        return 200\nclass ContaJuridicaPoupanca(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\"):\n        super().__init__(cliente, numero_conta, agencia)\n    def deposito_inicial(self):",
+        "detail": "sistema_bancario_v3",
+        "documentation": {}
+    },
+    {
+        "label": "ContaJuridicaPoupanca",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3",
+        "description": "sistema_bancario_v3",
+        "peekOfCode": "class ContaJuridicaPoupanca(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\"):\n        super().__init__(cliente, numero_conta, agencia)\n    def deposito_inicial(self):\n        return 150\nclass Cliente:\n    clientes: list[dict] = []\n    def __init__(self, endereco):\n        self._endereco = endereco\n        self._contas = []",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -429,7 +493,16 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "def validar_endereco(endereco):\n    if not endereco:\n        return False, \"❌ O endereço é obrigatório!\"\n    return True, \"\"\ndef obter_documento():\n    documento = input(\n        \"Digite o CPF ou CNPJ do usuário a ser editado (somente números): \"\n    )\n    return documento.replace(\".\", \"\").replace(\"-\", \"\").strip()\ndef encontrar_usuario(usuarios, documento):",
+        "peekOfCode": "def validar_endereco(endereco):\n    if not endereco:\n        return False, \"❌ O endereço é obrigatório!\"\n    return True, \"\"\ndef validar_numero_conta(numero):\n    if not re.match(r\"^\\d{3}/\\d$\", numero):\n        return (\n            False,\n            \"❌ Formato de número de conta inválido! Use o formato xxx/x.\",\n        )  # noqa",
+        "detail": "sistema_bancario_v3",
+        "documentation": {}
+    },
+    {
+        "label": "validar_numero_conta",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3",
+        "description": "sistema_bancario_v3",
+        "peekOfCode": "def validar_numero_conta(numero):\n    if not re.match(r\"^\\d{3}/\\d$\", numero):\n        return (\n            False,\n            \"❌ Formato de número de conta inválido! Use o formato xxx/x.\",\n        )  # noqa\n    return True, \"\"\ndef obter_documento():\n    documento = input(\n        \"Digite o CPF ou CNPJ do usuário a ser editado (somente números): \"",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -492,25 +565,52 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "def menu_principal():\n    usuarios = Cliente.clientes\n    contas = {}\n    while True:\n        option = input(\n            \"\\nBem-vindo(a) ao Banco Python!\\nEscolha uma opção:\\n\\n\"\n            \"[0] - Saldo\\n[1] - Saque\\n[2] - Depósito\\n[3] - Extrato\\n[4] - Criar Usuário\\n[5] - Editar Usuários\\n\"  # noqa\n            \"[6] - Listar Usuários\\n[7] - Criar Conta\\n[8] - Listar Contas\\n[9] - Encerrar Conta\\n[10] - Sair\\n\\n\"  # noqa\n            \"Digite o número da opção desejada: \"\n        )",
+        "peekOfCode": "def menu_principal():\n    usuarios = Cliente.clientes\n    while True:\n        option = input(\n            \"\\nBem-vindo(a) ao Banco Python!\\nEscolha uma opção:\\n\\n\"\n            \"[0] - Saldo\\n[1] - Saque\\n[2] - Depósito\\n[3] - Extrato\\n[4] - Criar Usuário\\n[5] - Editar Usuários\\n\"  # noqa\n            \"[6] - Listar Usuários\\n[7] - Criar Conta\\n[8] - Listar Contas\\n[9] - Encerrar Conta\\n[10] - Sair\\n\\n\"  # noqa\n            \"Digite o número da opção desejada: \"\n        )\n        if option == \"0\":",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
     {
-        "label": "obter_conta",
+        "label": "exibir_saldo",
         "kind": 2,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "def obter_conta(contas):\n    numero = int(input(\"Digite o número da conta: \"))\n    return contas.get(numero, None)\ndef mostrar_extrato(conta):\n    print(\"\\nExtrato da conta:\")\n    for transacao in conta.historico.transacoes:\n        print(transacao)\nmenu_principal()",
+        "peekOfCode": "def exibir_saldo():\n    conta = Conta.obter_conta()\n    if conta:\n        conta.exibir_saldo()\ndef realizar_saque():\n    conta = Conta.obter_conta()\n    if conta:\n        valor = float(input(\"Digite o valor do saque: R$ \"))\n        transacao = Saque(valor)\n        transacao.registrar(conta)",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
     {
-        "label": "mostrar_extrato",
+        "label": "realizar_saque",
         "kind": 2,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "def mostrar_extrato(conta):\n    print(\"\\nExtrato da conta:\")\n    for transacao in conta.historico.transacoes:\n        print(transacao)\nmenu_principal()",
+        "peekOfCode": "def realizar_saque():\n    conta = Conta.obter_conta()\n    if conta:\n        valor = float(input(\"Digite o valor do saque: R$ \"))\n        transacao = Saque(valor)\n        transacao.registrar(conta)\ndef realizar_deposito():\n    conta = Conta.obter_conta()\n    if conta:\n        valor = float(input(\"Digite o valor do depósito: R$ \"))",
+        "detail": "sistema_bancario_v3",
+        "documentation": {}
+    },
+    {
+        "label": "realizar_deposito",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3",
+        "description": "sistema_bancario_v3",
+        "peekOfCode": "def realizar_deposito():\n    conta = Conta.obter_conta()\n    if conta:\n        valor = float(input(\"Digite o valor do depósito: R$ \"))\n        transacao = Deposito(valor)\n        transacao.registrar(conta)\ndef exibir_extrato():\n    conta = Conta.obter_conta()\n    if conta:\n        conta.exibir_extrato()",
+        "detail": "sistema_bancario_v3",
+        "documentation": {}
+    },
+    {
+        "label": "exibir_extrato",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3",
+        "description": "sistema_bancario_v3",
+        "peekOfCode": "def exibir_extrato():\n    conta = Conta.obter_conta()\n    if conta:\n        conta.exibir_extrato()\ndef criar_usuario(usuarios):\n    while True:\n        documento = input(\"Digite o CPF ou CNPJ do usuário: \")\n        valido, mensagem = validar_documento(documento)\n        if not valido:\n            print(f\"\\n{mensagem}\\n\")",
+        "detail": "sistema_bancario_v3",
+        "documentation": {}
+    },
+    {
+        "label": "criar_usuario",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3",
+        "description": "sistema_bancario_v3",
+        "peekOfCode": "def criar_usuario(usuarios):\n    while True:\n        documento = input(\"Digite o CPF ou CNPJ do usuário: \")\n        valido, mensagem = validar_documento(documento)\n        if not valido:\n            print(f\"\\n{mensagem}\\n\")\n            continue\n        break\n    if documento_existe(documento, usuarios):\n        if len(documento) == 11:",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     }
