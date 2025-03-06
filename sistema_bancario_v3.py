@@ -183,13 +183,21 @@ class Conta(ABC):
     ultima_conta_criada = "000"
     contas: List["Conta"] = []
 
-    def __init__(self, cliente, numero_conta, agencia="0001", historico=None):
+    def __init__(
+        self,
+        cliente,
+        numero_conta,
+        agencia="0001",
+        historico=None,
+        co_titular=None,  # noqa
+    ):
         self._saldo = 0
         self._cliente = cliente
         self._numero_conta = numero_conta
         self._agencia = agencia
         self._historico = historico if historico else Historico()
         self._data_encerramento = None
+        self._co_titular = co_titular
 
     @property
     def historico(self):
@@ -307,7 +315,9 @@ class Conta(ABC):
             if self._data_encerramento
             else ""
         )
-
+        co_titular = (
+            f"Cônjuge: {self._co_titular['cpf']}," if self._co_titular else ""
+        )  # noqa
         return f"Cliente: {documento}, {co_titular} Agência: {self._agencia}, Conta: {self._numero_conta}, Saldo: R$ {self._saldo:.2f}, {encerramento}"  # noqa
 
 
@@ -326,17 +336,21 @@ class ContaFactory:
 
         if tipo_conta == "5":  # Conta Conjunta
             co_titular_documento = input("Digite o CPF do cônjuge: ")
+
+            if co_titular_documento == documento:
+                print("\n❌ O cônjuge não pode ser o mesmo que o titular!\n")
+                return
+
             co_titular = encontrar_usuario(usuarios, co_titular_documento)
+
             if not co_titular:
                 print("\n❌ Cônjuge não encontrado! Cadastre-o primeiro.\n")
                 return
             conta = ContaFactory._criar_instancia_conta(
                 tipo_conta, usuario, co_titular
             )  # noqa
-            conta = ContaFactory._criar_instancia_conta(tipo_conta, usuario)
         else:
             conta = ContaFactory._criar_instancia_conta(tipo_conta, usuario)
-
         if not conta:
             print("\n❌ Tipo de conta inválido! Tente novamente.\n")
             return
@@ -346,6 +360,7 @@ class ContaFactory:
         Cliente.adicionar_conta(usuario, conta)
         if tipo_conta == "5":  # Conta Conjunta
             Cliente.adicionar_conta(co_titular, conta)
+
         print("\n✅ Conta criada com sucesso!\n")
 
     @staticmethod
@@ -373,7 +388,7 @@ class ContaFactory:
             idade = (datetime.now() - data_nascimento).days // 365
 
             if idade < 18:
-                print("\nUsuário menor de idade. Verificando responsável...\n")
+                print("\nUsuário menor de idade. Informe o responsável...\n")
                 responsavel = ContaFactory._obter_responsavel()
                 if not responsavel:
                     print(
@@ -459,14 +474,18 @@ class ContaFactory:
             "8": ContaJuridicaPoupanca,
         }
 
-        conta_class = conta_classes.get(tipo_conta)
-        if conta_class:
-            if tipo_conta == "5":  # Conta Conjunta
-                return conta_class(
-                    usuario, numero_conta_formatado, co_titular=co_titular
-                )
-            return conta_class(usuario, numero_conta_formatado)
-        return None
+        instancia_conta = conta_classes.get(tipo_conta)
+
+        if instancia_conta is None:
+            print("\n❌ Tipo de conta inválido! Tente novamente.\n")
+            return None
+
+        if tipo_conta == "5":  # Conta Conjunta
+            return instancia_conta(
+                usuario, numero_conta_formatado, co_titular=co_titular
+            )  # noqa
+        else:
+            return instancia_conta(usuario, numero_conta_formatado)
 
     @staticmethod
     def _realizar_deposito_inicial(conta):
@@ -504,7 +523,12 @@ class ContaFactory:
 
 class ContaCorrente(Conta):
     def __init__(
-        self, cliente, numero_conta, agencia="0001", limite=1500, limite_saques=3
+        self,
+        cliente,
+        numero_conta,
+        agencia="0001",
+        limite=1500,
+        limite_saques=3,  # noqa
     ):
         super().__init__(cliente, numero_conta, agencia)
         self._limite = limite
@@ -541,7 +565,7 @@ class ContaSalario(Conta):
 
 class ContaConjunta(Conta):
     def __init__(self, cliente, numero_conta, agencia="0001", co_titular=None):
-        super().__init__(cliente, numero_conta, agencia)
+        super().__init__(cliente, numero_conta, agencia, co_titular=co_titular)
         self._co_titular = co_titular
 
     def deposito_inicial(self):
@@ -595,7 +619,6 @@ class Cliente:
                     cliente["contas"] = []
                 if conta not in cliente["contas"]:
                     cliente["contas"].append(conta)
-                break
 
     def realizar_transacao(self, conta, transacao: Transacao):
         transacao.registrar(conta)
@@ -813,7 +836,7 @@ def criar_usuario(usuarios):
             data_abertura=data,
         )
 
-    print("Usuário criado com sucesso!")
+    print("\n✅ Usuário criado com sucesso!")
 
 
 menu_principal()

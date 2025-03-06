@@ -1,5 +1,37 @@
 [
     {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "importPath": "datetime",
         "description": "datetime",
@@ -24,12 +56,11 @@
         "documentation": {}
     },
     {
-        "label": "re",
-        "kind": 6,
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
         "isExtraImport": true,
-        "importPath": "re",
-        "description": "re",
-        "detail": "re",
+        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -49,11 +80,668 @@
         "documentation": {}
     },
     {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
+        "label": "ABC",
+        "importPath": "abc",
+        "description": "abc",
         "isExtraImport": true,
-        "detail": "typing",
+        "detail": "abc",
+        "documentation": {}
+    },
+    {
+        "label": "abstractmethod",
+        "importPath": "abc",
+        "description": "abc",
+        "isExtraImport": true,
+        "detail": "abc",
+        "documentation": {}
+    },
+    {
+        "label": "ABC",
+        "importPath": "abc",
+        "description": "abc",
+        "isExtraImport": true,
+        "detail": "abc",
+        "documentation": {}
+    },
+    {
+        "label": "abstractmethod",
+        "importPath": "abc",
+        "description": "abc",
+        "isExtraImport": true,
+        "detail": "abc",
+        "documentation": {}
+    },
+    {
+        "label": "Cliente",
+        "importPath": "src.cliente",
+        "description": "src.cliente",
+        "isExtraImport": true,
+        "detail": "src.cliente",
+        "documentation": {}
+    },
+    {
+        "label": "Cliente",
+        "importPath": "src.cliente",
+        "description": "src.cliente",
+        "isExtraImport": true,
+        "detail": "src.cliente",
+        "documentation": {}
+    },
+    {
+        "label": "PessoaFisica",
+        "importPath": "src.cliente",
+        "description": "src.cliente",
+        "isExtraImport": true,
+        "detail": "src.cliente",
+        "documentation": {}
+    },
+    {
+        "label": "PessoaJuridica",
+        "importPath": "src.cliente",
+        "description": "src.cliente",
+        "isExtraImport": true,
+        "detail": "src.cliente",
+        "documentation": {}
+    },
+    {
+        "label": "Conta",
+        "importPath": "src.conta",
+        "description": "src.conta",
+        "isExtraImport": true,
+        "detail": "src.conta",
+        "documentation": {}
+    },
+    {
+        "label": "Conta",
+        "importPath": "src.conta",
+        "description": "src.conta",
+        "isExtraImport": true,
+        "detail": "src.conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaCorrente",
+        "importPath": "src.conta",
+        "description": "src.conta",
+        "isExtraImport": true,
+        "detail": "src.conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaPoupanca",
+        "importPath": "src.conta",
+        "description": "src.conta",
+        "isExtraImport": true,
+        "detail": "src.conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaUniversitaria",
+        "importPath": "src.conta",
+        "description": "src.conta",
+        "isExtraImport": true,
+        "detail": "src.conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaSalario",
+        "importPath": "src.conta",
+        "description": "src.conta",
+        "isExtraImport": true,
+        "detail": "src.conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaConjunta",
+        "importPath": "src.conta",
+        "description": "src.conta",
+        "isExtraImport": true,
+        "detail": "src.conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaMenorIdade",
+        "importPath": "src.conta",
+        "description": "src.conta",
+        "isExtraImport": true,
+        "detail": "src.conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaJuridicaCorrente",
+        "importPath": "src.conta",
+        "description": "src.conta",
+        "isExtraImport": true,
+        "detail": "src.conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaJuridicaPoupanca",
+        "importPath": "src.conta",
+        "description": "src.conta",
+        "isExtraImport": true,
+        "detail": "src.conta",
+        "documentation": {}
+    },
+    {
+        "label": "Conta",
+        "importPath": "src.conta",
+        "description": "src.conta",
+        "isExtraImport": true,
+        "detail": "src.conta",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "Deposito",
+        "importPath": "src.transacao",
+        "description": "src.transacao",
+        "isExtraImport": true,
+        "detail": "src.transacao",
+        "documentation": {}
+    },
+    {
+        "label": "Saque",
+        "importPath": "src.transacao",
+        "description": "src.transacao",
+        "isExtraImport": true,
+        "detail": "src.transacao",
+        "documentation": {}
+    },
+    {
+        "label": "pytest",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pytest",
+        "description": "pytest",
+        "detail": "pytest",
+        "documentation": {}
+    },
+    {
+        "label": "unittest",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "unittest",
+        "description": "unittest",
+        "detail": "unittest",
+        "documentation": {}
+    },
+    {
+        "label": "documento_existe",
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "isExtraImport": true,
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "encontrar_usuario",
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "isExtraImport": true,
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "exibir_dados_usuario",
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "isExtraImport": true,
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "validar_documento",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_nome",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_data",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_endereco",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "Cliente",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.cliente",
+        "description": "sistema_bancario_v3.src.cliente",
+        "peekOfCode": "class Cliente:\n    clientes: list[dict] = []\n    def __init__(self, endereco):\n        self._endereco = endereco\n        self._contas = []\n    @classmethod\n    def adicionar_conta(cls, usuario, conta):\n        for cliente in cls.clientes:\n            if cliente.get(\"cpf\") == usuario.get(\"cpf\") or cliente.get(\n                \"cnpj\"",
+        "detail": "sistema_bancario_v3.src.cliente",
+        "documentation": {}
+    },
+    {
+        "label": "PessoaFisica",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.cliente",
+        "description": "sistema_bancario_v3.src.cliente",
+        "peekOfCode": "class PessoaFisica(Cliente):\n    def __init__(self, cpf, nome, data_nascimento, endereco):\n        super().__init__(endereco)\n        self._cpf = cpf\n        self._nome = nome\n        self._data_nascimento = data_nascimento\n        Cliente.clientes.append(\n            {\n                \"cpf\": cpf,\n                \"nome\": nome,",
+        "detail": "sistema_bancario_v3.src.cliente",
+        "documentation": {}
+    },
+    {
+        "label": "PessoaJuridica",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.cliente",
+        "description": "sistema_bancario_v3.src.cliente",
+        "peekOfCode": "class PessoaJuridica(Cliente):\n    def __init__(self, cnpj, nome, data_abertura, endereco):\n        super().__init__(endereco)\n        self._cnpj = cnpj\n        self._nome = nome\n        self._data_abertura = data_abertura\n        Cliente.clientes.append(\n            {\n                \"cnpj\": cnpj,\n                \"nome\": nome,",
+        "detail": "sistema_bancario_v3.src.cliente",
+        "documentation": {}
+    },
+    {
+        "label": "Conta",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.conta",
+        "description": "sistema_bancario_v3.src.conta",
+        "peekOfCode": "class Conta(ABC):\n    ultima_conta_criada = \"000\"\n    contas: List[\"Conta\"] = []\n    def __init__(\n        self,\n        cliente,\n        numero_conta,\n        agencia=\"0001\",\n        historico=None,\n        co_titular=None,",
+        "detail": "sistema_bancario_v3.src.conta",
+        "documentation": {}
+    },
+    {
+        "label": "menu_principal",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.main",
+        "description": "sistema_bancario_v3.src.main",
+        "peekOfCode": "def menu_principal():\n    usuarios = Cliente.clientes\n    while True:\n        option = input(\n            \"\\nBem-vindo(a) ao Banco Python!\\nEscolha uma opção:\\n\\n\"\n            \"[0] - Saldo\\n[1] - Saque\\n[2] - Depósito\\n[3] - Extrato\\n[4] - Criar Usuário\\n[5] - Editar Usuários\\n\"  # noqa\n            \"[6] - Listar Usuários\\n[7] - Criar Conta\\n[8] - Listar Contas\\n[9] - Encerrar Conta\\n[10] - Sair\\n\\n\"  # noqa\n            \"Digite o número da opção desejada: \"\n        )\n        if option == \"0\":",
+        "detail": "sistema_bancario_v3.src.main",
+        "documentation": {}
+    },
+    {
+        "label": "ContaCorrente",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.tipo_conta",
+        "description": "sistema_bancario_v3.src.tipo_conta",
+        "peekOfCode": "class ContaCorrente(Conta):\n    def __init__(\n        self,\n        cliente,\n        numero_conta,\n        agencia=\"0001\",\n        limite=1500,\n        limite_saques=3,\n    ):\n        super().__init__(cliente, numero_conta, agencia)",
+        "detail": "sistema_bancario_v3.src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaPoupanca",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.tipo_conta",
+        "description": "sistema_bancario_v3.src.tipo_conta",
+        "peekOfCode": "class ContaPoupanca(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\"):\n        super().__init__(cliente, numero_conta, agencia)\n    def deposito_inicial(self):\n        return 50\nclass ContaUniversitaria(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", limite=500):\n        super().__init__(cliente, numero_conta, agencia)\n        self._limite = limite\n    def deposito_inicial(self):",
+        "detail": "sistema_bancario_v3.src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaUniversitaria",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.tipo_conta",
+        "description": "sistema_bancario_v3.src.tipo_conta",
+        "peekOfCode": "class ContaUniversitaria(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", limite=500):\n        super().__init__(cliente, numero_conta, agencia)\n        self._limite = limite\n    def deposito_inicial(self):\n        return 20\nclass ContaSalario(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\"):\n        super().__init__(cliente, numero_conta, agencia)\n    def deposito_inicial(self):",
+        "detail": "sistema_bancario_v3.src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaSalario",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.tipo_conta",
+        "description": "sistema_bancario_v3.src.tipo_conta",
+        "peekOfCode": "class ContaSalario(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\"):\n        super().__init__(cliente, numero_conta, agencia)\n    def deposito_inicial(self):\n        return 0\nclass ContaConjunta(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", co_titular=None):\n        super().__init__(cliente, numero_conta, agencia, co_titular=co_titular)\n        self._co_titular = co_titular\n    def deposito_inicial(self):",
+        "detail": "sistema_bancario_v3.src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaConjunta",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.tipo_conta",
+        "description": "sistema_bancario_v3.src.tipo_conta",
+        "peekOfCode": "class ContaConjunta(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", co_titular=None):\n        super().__init__(cliente, numero_conta, agencia, co_titular=co_titular)\n        self._co_titular = co_titular\n    def deposito_inicial(self):\n        return 100\n    @property\n    def co_titular(self):\n        return self._co_titular\nclass ContaMenorIdade(Conta):",
+        "detail": "sistema_bancario_v3.src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaMenorIdade",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.tipo_conta",
+        "description": "sistema_bancario_v3.src.tipo_conta",
+        "peekOfCode": "class ContaMenorIdade(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", responsavel=None):  # noqa\n        super().__init__(cliente, numero_conta, agencia)\n        self._responsavel = responsavel\n    def deposito_inicial(self):\n        return 10\nclass ContaJuridicaCorrente(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", limite=1000):\n        super().__init__(cliente, numero_conta, agencia)\n        self._limite = limite",
+        "detail": "sistema_bancario_v3.src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaJuridicaCorrente",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.tipo_conta",
+        "description": "sistema_bancario_v3.src.tipo_conta",
+        "peekOfCode": "class ContaJuridicaCorrente(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", limite=1000):\n        super().__init__(cliente, numero_conta, agencia)\n        self._limite = limite\n    def deposito_inicial(self):\n        return 200\nclass ContaJuridicaPoupanca(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\"):\n        super().__init__(cliente, numero_conta, agencia)\n    def deposito_inicial(self):",
+        "detail": "sistema_bancario_v3.src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaJuridicaPoupanca",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.tipo_conta",
+        "description": "sistema_bancario_v3.src.tipo_conta",
+        "peekOfCode": "class ContaJuridicaPoupanca(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\"):\n        super().__init__(cliente, numero_conta, agencia)\n    def deposito_inicial(self):\n        return 150",
+        "detail": "sistema_bancario_v3.src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "Transacao",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.transacao",
+        "description": "sistema_bancario_v3.src.transacao",
+        "peekOfCode": "class Transacao(ABC):\n    @abstractmethod\n    def registrar(self, conta):\n        pass\nclass Historico:\n    def __init__(self):\n        self.transacoes = []\n    def adicionar_transacao(self, transacao):\n        self.transacoes.append(transacao)\nclass Deposito(Transacao):",
+        "detail": "sistema_bancario_v3.src.transacao",
+        "documentation": {}
+    },
+    {
+        "label": "Historico",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.transacao",
+        "description": "sistema_bancario_v3.src.transacao",
+        "peekOfCode": "class Historico:\n    def __init__(self):\n        self.transacoes = []\n    def adicionar_transacao(self, transacao):\n        self.transacoes.append(transacao)\nclass Deposito(Transacao):\n    def __init__(self, valor):\n        self.valor = valor\n    def registrar(self, conta):\n        if conta.depositar(self.valor):",
+        "detail": "sistema_bancario_v3.src.transacao",
+        "documentation": {}
+    },
+    {
+        "label": "Deposito",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.transacao",
+        "description": "sistema_bancario_v3.src.transacao",
+        "peekOfCode": "class Deposito(Transacao):\n    def __init__(self, valor):\n        self.valor = valor\n    def registrar(self, conta):\n        if conta.depositar(self.valor):\n            data_hora = datetime.now().strftime(\"%d/%m/%Y %H:%M:%S\")\n            conta.historico.adicionar_transacao(\n                f\"{data_hora} + R$ {self.valor:.2f}\"\n            )  # noqa\nclass Saque(Transacao):",
+        "detail": "sistema_bancario_v3.src.transacao",
+        "documentation": {}
+    },
+    {
+        "label": "Saque",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.transacao",
+        "description": "sistema_bancario_v3.src.transacao",
+        "peekOfCode": "class Saque(Transacao):\n    def __init__(self, valor):\n        self.valor = valor\n    def registrar(self, conta):\n        if conta.sacar(self.valor):\n            data_hora = datetime.now().strftime(\"%d/%m/%Y %H:%M:%S\")\n            conta.historico.adicionar_transacao(\n                f\"{data_hora} - R$ {self.valor:.2f}\"\n            )  # noqa",
+        "detail": "sistema_bancario_v3.src.transacao",
+        "documentation": {}
+    },
+    {
+        "label": "documento_existe",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.utils",
+        "description": "sistema_bancario_v3.src.utils",
+        "peekOfCode": "def documento_existe(documento, clientes):\n    return any(\n        cliente.get(\"cpf\") == documento or cliente.get(\"cnpj\") == documento\n        for cliente in clientes\n    )\ndef encontrar_usuario(usuarios, documento):\n    return next(\n        (\n            u\n            for u in usuarios",
+        "detail": "sistema_bancario_v3.src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "encontrar_usuario",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.utils",
+        "description": "sistema_bancario_v3.src.utils",
+        "peekOfCode": "def encontrar_usuario(usuarios, documento):\n    return next(\n        (\n            u\n            for u in usuarios\n            if (\"cpf\" in u and u[\"cpf\"] == documento)\n            or (\"cnpj\" in u and u[\"cnpj\"] == documento)\n        ),\n        None,\n    )",
+        "detail": "sistema_bancario_v3.src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "exibir_dados_usuario",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.utils",
+        "description": "sistema_bancario_v3.src.utils",
+        "peekOfCode": "def exibir_dados_usuario(usuario):\n    print(\"\\n📋 Dados Atuais do Usuário 📋\\n\")\n    print(f\"Nome: {usuario['nome']}\")\n    if \"cpf\" in usuario:\n        print(f\"Data de Nascimento: {usuario['data_nascimento']}\")\n        print(f\"CPF: {usuario['cpf']}\")\n    else:\n        print(f\"Data de Abertura: {usuario['data_abertura']}\")\n        print(f\"CNPJ: {usuario['cnpj']}\")\n    print(f\"Endereço: {usuario['endereco']}\\n\")",
+        "detail": "sistema_bancario_v3.src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "validar_documento",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.validators",
+        "description": "sistema_bancario_v3.src.validators",
+        "peekOfCode": "def validar_documento(documento):\n    if not documento:\n        return False, \"Documento não pode ser vazio.\"\n    if len(documento) < 11:\n        return False, \"Documento deve ter pelo menos 11 caracteres.\"\n    if len(documento) > 14:\n        return False, \"Documento deve ter no máximo 14 caracteres.\"\n    return True, \"\"\ndef validar_nome(nome):\n    if not nome:",
+        "detail": "sistema_bancario_v3.src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_nome",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.validators",
+        "description": "sistema_bancario_v3.src.validators",
+        "peekOfCode": "def validar_nome(nome):\n    if not nome:\n        return False, \"Nome não pode ser vazio.\"\n    return True, \"\"\ndef validar_data(data):\n    if not data:\n        return False, \"Data não pode ser vazia.\"\n    try:\n        datetime.strptime(data, \"%d/%m/%Y\")\n    except ValueError:",
+        "detail": "sistema_bancario_v3.src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_data",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.validators",
+        "description": "sistema_bancario_v3.src.validators",
+        "peekOfCode": "def validar_data(data):\n    if not data:\n        return False, \"Data não pode ser vazia.\"\n    try:\n        datetime.strptime(data, \"%d/%m/%Y\")\n    except ValueError:\n        return False, \"Data deve estar no formato dd/mm/aaaa.\"\n    return True, \"\"\ndef validar_endereco(endereco):\n    if not endereco:",
+        "detail": "sistema_bancario_v3.src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_endereco",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.validators",
+        "description": "sistema_bancario_v3.src.validators",
+        "peekOfCode": "def validar_endereco(endereco):\n    if not endereco:\n        return False, \"Endereço não pode ser vazio.\"\n    return True, \"\"\ndef validar_numero_conta(numero):\n    if not re.match(r\"^\\d{3}/\\d$\", numero):\n        return False, \"Número da conta deve estar no formato XXX/X.\"\n    return True, \"\"",
+        "detail": "sistema_bancario_v3.src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_numero_conta",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.validators",
+        "description": "sistema_bancario_v3.src.validators",
+        "peekOfCode": "def validar_numero_conta(numero):\n    if not re.match(r\"^\\d{3}/\\d$\", numero):\n        return False, \"Número da conta deve estar no formato XXX/X.\"\n    return True, \"\"",
+        "detail": "sistema_bancario_v3.src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "test_cliente_creation",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_cliente",
+        "description": "sistema_bancario_v3.tests.test_cliente",
+        "peekOfCode": "def test_cliente_creation():\n    # Test creation of a PessoaFisica\n    pf = PessoaFisica(cpf=\"12345678901\", nome=\"João Silva\", data_nascimento=\"01/01/1990\", endereco=\"Rua A, 123\")\n    assert pf._cpf == \"12345678901\"\n    assert pf._nome == \"João Silva\"\n    assert pf._data_nascimento == \"01/01/1990\"\n    assert pf._endereco == \"Rua A, 123\"\n    assert len(Cliente.clientes) == 1  # Ensure the client is added to the list\n    # Test creation of a PessoaJuridica\n    pj = PessoaJuridica(cnpj=\"12345678000195\", nome=\"Empresa XYZ\", data_abertura=\"01/01/2020\", endereco=\"Avenida B, 456\")",
+        "detail": "sistema_bancario_v3.tests.test_cliente",
+        "documentation": {}
+    },
+    {
+        "label": "test_cliente_editing",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_cliente",
+        "description": "sistema_bancario_v3.tests.test_cliente",
+        "peekOfCode": "def test_cliente_editing():\n    pf = PessoaFisica(cpf=\"12345678901\", nome=\"João Silva\", data_nascimento=\"01/01/1990\", endereco=\"Rua A, 123\")\n    pf._nome = \"João da Silva\"\n    pf._endereco = \"Rua A, 456\"\n    assert pf._nome == \"João da Silva\"\n    assert pf._endereco == \"Rua A, 456\"\ndef test_cliente_listing():\n    Cliente.clientes.clear()  # Clear existing clients for testing\n    pf1 = PessoaFisica(cpf=\"12345678901\", nome=\"João Silva\", data_nascimento=\"01/01/1990\", endereco=\"Rua A, 123\")\n    pf2 = PessoaFisica(cpf=\"10987654321\", nome=\"Maria Oliveira\", data_nascimento=\"02/02/1992\", endereco=\"Rua B, 456\")",
+        "detail": "sistema_bancario_v3.tests.test_cliente",
+        "documentation": {}
+    },
+    {
+        "label": "test_cliente_listing",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_cliente",
+        "description": "sistema_bancario_v3.tests.test_cliente",
+        "peekOfCode": "def test_cliente_listing():\n    Cliente.clientes.clear()  # Clear existing clients for testing\n    pf1 = PessoaFisica(cpf=\"12345678901\", nome=\"João Silva\", data_nascimento=\"01/01/1990\", endereco=\"Rua A, 123\")\n    pf2 = PessoaFisica(cpf=\"10987654321\", nome=\"Maria Oliveira\", data_nascimento=\"02/02/1992\", endereco=\"Rua B, 456\")\n    assert len(Cliente.clientes) == 2  # Ensure both clients are listed\ndef test_cliente_not_found():\n    Cliente.clientes.clear()  # Clear existing clients for testing\n    pf = PessoaFisica(cpf=\"12345678901\", nome=\"João Silva\", data_nascimento=\"01/01/1990\", endereco=\"Rua A, 123\")\n    assert pf not in Cliente.clientes  # Ensure the client is not found in an empty list",
+        "detail": "sistema_bancario_v3.tests.test_cliente",
+        "documentation": {}
+    },
+    {
+        "label": "test_cliente_not_found",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_cliente",
+        "description": "sistema_bancario_v3.tests.test_cliente",
+        "peekOfCode": "def test_cliente_not_found():\n    Cliente.clientes.clear()  # Clear existing clients for testing\n    pf = PessoaFisica(cpf=\"12345678901\", nome=\"João Silva\", data_nascimento=\"01/01/1990\", endereco=\"Rua A, 123\")\n    assert pf not in Cliente.clientes  # Ensure the client is not found in an empty list",
+        "detail": "sistema_bancario_v3.tests.test_cliente",
+        "documentation": {}
+    },
+    {
+        "label": "test_depositar",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_conta",
+        "description": "sistema_bancario_v3.tests.test_conta",
+        "peekOfCode": "def test_depositar():\n    conta = ContaCorrente(cliente={\"nome\": \"Test User\", \"cpf\": \"12345678901\"}, numero_conta=\"001/1\")\n    conta.depositar(100)\n    assert conta.saldo == 100\ndef test_sacar():\n    conta = ContaPoupanca(cliente={\"nome\": \"Test User\", \"cpf\": \"12345678901\"}, numero_conta=\"002/2\")\n    conta.depositar(100)\n    conta.sacar(50)\n    assert conta.saldo == 50\ndef test_sacar_saldo_insuficiente():",
+        "detail": "sistema_bancario_v3.tests.test_conta",
+        "documentation": {}
+    },
+    {
+        "label": "test_sacar",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_conta",
+        "description": "sistema_bancario_v3.tests.test_conta",
+        "peekOfCode": "def test_sacar():\n    conta = ContaPoupanca(cliente={\"nome\": \"Test User\", \"cpf\": \"12345678901\"}, numero_conta=\"002/2\")\n    conta.depositar(100)\n    conta.sacar(50)\n    assert conta.saldo == 50\ndef test_sacar_saldo_insuficiente():\n    conta = ContaUniversitaria(cliente={\"nome\": \"Test User\", \"cpf\": \"12345678901\"}, numero_conta=\"003/3\")\n    conta.depositar(30)\n    resultado = conta.sacar(50)\n    assert resultado is False",
+        "detail": "sistema_bancario_v3.tests.test_conta",
+        "documentation": {}
+    },
+    {
+        "label": "test_sacar_saldo_insuficiente",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_conta",
+        "description": "sistema_bancario_v3.tests.test_conta",
+        "peekOfCode": "def test_sacar_saldo_insuficiente():\n    conta = ContaUniversitaria(cliente={\"nome\": \"Test User\", \"cpf\": \"12345678901\"}, numero_conta=\"003/3\")\n    conta.depositar(30)\n    resultado = conta.sacar(50)\n    assert resultado is False\n    assert conta.saldo == 30\ndef test_exibir_extrato():\n    conta = ContaSalario(cliente={\"nome\": \"Test User\", \"cpf\": \"12345678901\"}, numero_conta=\"004/4\")\n    conta.depositar(200)\n    conta.sacar(100)",
+        "detail": "sistema_bancario_v3.tests.test_conta",
+        "documentation": {}
+    },
+    {
+        "label": "test_exibir_extrato",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_conta",
+        "description": "sistema_bancario_v3.tests.test_conta",
+        "peekOfCode": "def test_exibir_extrato():\n    conta = ContaSalario(cliente={\"nome\": \"Test User\", \"cpf\": \"12345678901\"}, numero_conta=\"004/4\")\n    conta.depositar(200)\n    conta.sacar(100)\n    extrato = conta.exibir_extrato()\n    assert \"Extrato de Transações\" in extrato\n    assert \"R$ 200.00\" in extrato\n    assert \"R$ 100.00\" in extrato\ndef test_encerrar_conta():\n    conta = ContaConjunta(cliente={\"nome\": \"Test User\", \"cpf\": \"12345678901\"}, numero_conta=\"005/5\")",
+        "detail": "sistema_bancario_v3.tests.test_conta",
+        "documentation": {}
+    },
+    {
+        "label": "test_encerrar_conta",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_conta",
+        "description": "sistema_bancario_v3.tests.test_conta",
+        "peekOfCode": "def test_encerrar_conta():\n    conta = ContaConjunta(cliente={\"nome\": \"Test User\", \"cpf\": \"12345678901\"}, numero_conta=\"005/5\")\n    conta.encerrar_conta()\n    assert conta.data_encerramento is not None\ndef test_criar_conta_juridica():\n    conta = ContaJuridicaCorrente(cliente={\"nome\": \"Test Company\", \"cnpj\": \"12345678000195\"}, numero_conta=\"006/6\")\n    conta.depositar(500)\n    assert conta.saldo == 500\ndef test_criar_conta_juridica_poupanca():\n    conta = ContaJuridicaPoupanca(cliente={\"nome\": \"Test Company\", \"cnpj\": \"12345678000195\"}, numero_conta=\"007/7\")",
+        "detail": "sistema_bancario_v3.tests.test_conta",
+        "documentation": {}
+    },
+    {
+        "label": "test_criar_conta_juridica",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_conta",
+        "description": "sistema_bancario_v3.tests.test_conta",
+        "peekOfCode": "def test_criar_conta_juridica():\n    conta = ContaJuridicaCorrente(cliente={\"nome\": \"Test Company\", \"cnpj\": \"12345678000195\"}, numero_conta=\"006/6\")\n    conta.depositar(500)\n    assert conta.saldo == 500\ndef test_criar_conta_juridica_poupanca():\n    conta = ContaJuridicaPoupanca(cliente={\"nome\": \"Test Company\", \"cnpj\": \"12345678000195\"}, numero_conta=\"007/7\")\n    conta.depositar(300)\n    assert conta.saldo == 300",
+        "detail": "sistema_bancario_v3.tests.test_conta",
+        "documentation": {}
+    },
+    {
+        "label": "test_criar_conta_juridica_poupanca",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_conta",
+        "description": "sistema_bancario_v3.tests.test_conta",
+        "peekOfCode": "def test_criar_conta_juridica_poupanca():\n    conta = ContaJuridicaPoupanca(cliente={\"nome\": \"Test Company\", \"cnpj\": \"12345678000195\"}, numero_conta=\"007/7\")\n    conta.depositar(300)\n    assert conta.saldo == 300",
+        "detail": "sistema_bancario_v3.tests.test_conta",
+        "documentation": {}
+    },
+    {
+        "label": "conta",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_transacao",
+        "description": "sistema_bancario_v3.tests.test_transacao",
+        "peekOfCode": "def conta():\n    return Conta(cliente={\"nome\": \"Test User\", \"cpf\": \"12345678901\"}, numero_conta=\"001/1\")\ndef test_deposito_registrar(conta):\n    deposito = Deposito(100)\n    deposito.registrar(conta)\n    assert conta.saldo == 100\n    assert len(conta.historico.transacoes) == 1\n    assert \" + R$ 100.00\" in conta.historico.transacoes[0]\ndef test_saque_registrar(conta):\n    deposito = Deposito(200)",
+        "detail": "sistema_bancario_v3.tests.test_transacao",
+        "documentation": {}
+    },
+    {
+        "label": "test_deposito_registrar",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_transacao",
+        "description": "sistema_bancario_v3.tests.test_transacao",
+        "peekOfCode": "def test_deposito_registrar(conta):\n    deposito = Deposito(100)\n    deposito.registrar(conta)\n    assert conta.saldo == 100\n    assert len(conta.historico.transacoes) == 1\n    assert \" + R$ 100.00\" in conta.historico.transacoes[0]\ndef test_saque_registrar(conta):\n    deposito = Deposito(200)\n    deposito.registrar(conta)\n    saque = Saque(100)",
+        "detail": "sistema_bancario_v3.tests.test_transacao",
+        "documentation": {}
+    },
+    {
+        "label": "test_saque_registrar",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_transacao",
+        "description": "sistema_bancario_v3.tests.test_transacao",
+        "peekOfCode": "def test_saque_registrar(conta):\n    deposito = Deposito(200)\n    deposito.registrar(conta)\n    saque = Saque(100)\n    saque.registrar(conta)\n    assert conta.saldo == 100\n    assert len(conta.historico.transacoes) == 2\n    assert \" - R$ 100.00\" in conta.historico.transacoes[1]\ndef test_saque_insuficiente(conta):\n    saque = Saque(100)",
+        "detail": "sistema_bancario_v3.tests.test_transacao",
+        "documentation": {}
+    },
+    {
+        "label": "test_saque_insuficiente",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_transacao",
+        "description": "sistema_bancario_v3.tests.test_transacao",
+        "peekOfCode": "def test_saque_insuficiente(conta):\n    saque = Saque(100)\n    saque.registrar(conta)\n    assert conta.saldo == 0\n    assert len(conta.historico.transacoes) == 0  # No transaction should be recorded\ndef test_deposito_negativo(conta):\n    deposito = Deposito(-50)\n    deposito.registrar(conta)\n    assert conta.saldo == 0\n    assert len(conta.historico.transacoes) == 0  # No transaction should be recorded",
+        "detail": "sistema_bancario_v3.tests.test_transacao",
+        "documentation": {}
+    },
+    {
+        "label": "test_deposito_negativo",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_transacao",
+        "description": "sistema_bancario_v3.tests.test_transacao",
+        "peekOfCode": "def test_deposito_negativo(conta):\n    deposito = Deposito(-50)\n    deposito.registrar(conta)\n    assert conta.saldo == 0\n    assert len(conta.historico.transacoes) == 0  # No transaction should be recorded",
+        "detail": "sistema_bancario_v3.tests.test_transacao",
+        "documentation": {}
+    },
+    {
+        "label": "TestUtils",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.tests.test_utils",
+        "description": "sistema_bancario_v3.tests.test_utils",
+        "peekOfCode": "class TestUtils(unittest.TestCase):\n    def setUp(self):\n        self.clientes = [\n            {\"cpf\": \"12345678901\", \"nome\": \"Cliente A\", \"endereco\": \"Endereço A\"},\n            {\"cnpj\": \"12345678000195\", \"nome\": \"Cliente B\", \"endereco\": \"Endereço B\"},\n        ]\n    def test_documento_existe_cpf(self):\n        self.assertTrue(documento_existe(\"12345678901\", self.clientes))\n    def test_documento_existe_cnpj(self):\n        self.assertTrue(documento_existe(\"12345678000195\", self.clientes))",
+        "detail": "sistema_bancario_v3.tests.test_utils",
+        "documentation": {}
+    },
+    {
+        "label": "test_validar_documento",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_validators",
+        "description": "sistema_bancario_v3.tests.test_validators",
+        "peekOfCode": "def test_validar_documento():\n    assert validar_documento(\"12345678901\") == (True, \"\")\n    assert validar_documento(\"1234567890\") == (False, \"Documento deve ter 11 ou 14 dígitos.\")\n    assert validar_documento(\"12345678901234\") == (False, \"Documento deve ter 11 ou 14 dígitos.\")\n    assert validar_documento(\"\") == (False, \"Documento não pode ser vazio.\")\ndef test_validar_nome():\n    assert validar_nome(\"João da Silva\") == (True, \"\")\n    assert validar_nome(\"\") == (False, \"Nome não pode ser vazio.\")\ndef test_validar_data():\n    assert validar_data(\"01/01/2000\") == (True, \"\")",
+        "detail": "sistema_bancario_v3.tests.test_validators",
+        "documentation": {}
+    },
+    {
+        "label": "test_validar_nome",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_validators",
+        "description": "sistema_bancario_v3.tests.test_validators",
+        "peekOfCode": "def test_validar_nome():\n    assert validar_nome(\"João da Silva\") == (True, \"\")\n    assert validar_nome(\"\") == (False, \"Nome não pode ser vazio.\")\ndef test_validar_data():\n    assert validar_data(\"01/01/2000\") == (True, \"\")\n    assert validar_data(\"31/02/2000\") == (False, \"Data inválida.\")\n    assert validar_data(\"\") == (False, \"Data não pode ser vazia.\")\ndef test_validar_endereco():\n    assert validar_endereco(\"Rua das Flores, 123\") == (True, \"\")\n    assert validar_endereco(\"\") == (False, \"Endereço não pode ser vazio.\")",
+        "detail": "sistema_bancario_v3.tests.test_validators",
+        "documentation": {}
+    },
+    {
+        "label": "test_validar_data",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_validators",
+        "description": "sistema_bancario_v3.tests.test_validators",
+        "peekOfCode": "def test_validar_data():\n    assert validar_data(\"01/01/2000\") == (True, \"\")\n    assert validar_data(\"31/02/2000\") == (False, \"Data inválida.\")\n    assert validar_data(\"\") == (False, \"Data não pode ser vazia.\")\ndef test_validar_endereco():\n    assert validar_endereco(\"Rua das Flores, 123\") == (True, \"\")\n    assert validar_endereco(\"\") == (False, \"Endereço não pode ser vazio.\")",
+        "detail": "sistema_bancario_v3.tests.test_validators",
+        "documentation": {}
+    },
+    {
+        "label": "test_validar_endereco",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.tests.test_validators",
+        "description": "sistema_bancario_v3.tests.test_validators",
+        "peekOfCode": "def test_validar_endereco():\n    assert validar_endereco(\"Rua das Flores, 123\") == (True, \"\")\n    assert validar_endereco(\"\") == (False, \"Endereço não pode ser vazio.\")",
+        "detail": "sistema_bancario_v3.tests.test_validators",
         "documentation": {}
     },
     {
@@ -340,7 +1028,7 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "class Conta(ABC):\n    ultima_conta_criada = \"000\"\n    contas: List[\"Conta\"] = []\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", historico=None):\n        self._saldo = 0\n        self._cliente = cliente\n        self._numero_conta = numero_conta\n        self._agencia = agencia\n        self._historico = historico if historico else Historico()\n        self._data_encerramento = None",
+        "peekOfCode": "class Conta(ABC):\n    ultima_conta_criada = \"000\"\n    contas: List[\"Conta\"] = []\n    def __init__(\n        self,\n        cliente,\n        numero_conta,\n        agencia=\"0001\",\n        historico=None,\n        co_titular=None,  # noqa",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -358,7 +1046,7 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "class ContaCorrente(Conta):\n    def __init__(\n        self, cliente, numero_conta, agencia=\"0001\", limite=1500, limite_saques=3\n    ):\n        super().__init__(cliente, numero_conta, agencia)\n        self._limite = limite\n        self._limite_saques = limite_saques\n    def deposito_inicial(self):\n        return 100\nclass ContaPoupanca(Conta):",
+        "peekOfCode": "class ContaCorrente(Conta):\n    def __init__(\n        self,\n        cliente,\n        numero_conta,\n        agencia=\"0001\",\n        limite=1500,\n        limite_saques=3,  # noqa\n    ):\n        super().__init__(cliente, numero_conta, agencia)",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -385,7 +1073,7 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "class ContaSalario(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\"):\n        super().__init__(cliente, numero_conta, agencia)\n    def deposito_inicial(self):\n        return 0\nclass ContaConjunta(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", co_titular=None):\n        super().__init__(cliente, numero_conta, agencia)\n        self._co_titular = co_titular\n    def deposito_inicial(self):",
+        "peekOfCode": "class ContaSalario(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\"):\n        super().__init__(cliente, numero_conta, agencia)\n    def deposito_inicial(self):\n        return 0\nclass ContaConjunta(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", co_titular=None):\n        super().__init__(cliente, numero_conta, agencia, co_titular=co_titular)\n        self._co_titular = co_titular\n    def deposito_inicial(self):",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
@@ -394,7 +1082,7 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3",
         "description": "sistema_bancario_v3",
-        "peekOfCode": "class ContaConjunta(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", co_titular=None):\n        super().__init__(cliente, numero_conta, agencia)\n        self._co_titular = co_titular\n    def deposito_inicial(self):\n        return 100\n    @property\n    def co_titular(self):\n        return self._co_titular\nclass ContaMenorIdade(Conta):",
+        "peekOfCode": "class ContaConjunta(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", co_titular=None):\n        super().__init__(cliente, numero_conta, agencia, co_titular=co_titular)\n        self._co_titular = co_titular\n    def deposito_inicial(self):\n        return 100\n    @property\n    def co_titular(self):\n        return self._co_titular\nclass ContaMenorIdade(Conta):",
         "detail": "sistema_bancario_v3",
         "documentation": {}
     },
