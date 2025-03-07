@@ -2,8 +2,8 @@ from typing import List
 from datetime import datetime
 from abc import ABC, abstractmethod
 
-from .validators import validar_numero_conta
-from .transacao import Historico
+from src.validators import validar_numero_conta
+from src.transacao import Historico
 
 
 class Conta(ABC):
@@ -17,6 +17,7 @@ class Conta(ABC):
         agencia="0001",
         historico=None,
         co_titular=None,
+        responsavel=None,
     ):
         self._saldo = 0
         self._cliente = cliente
@@ -25,6 +26,7 @@ class Conta(ABC):
         self._historico = historico if historico else Historico()
         self._data_encerramento = None
         self._co_titular = co_titular
+        self._responsavel = responsavel
 
     @property
     def historico(self):
@@ -145,4 +147,9 @@ class Conta(ABC):
         co_titular = (
             f"Cônjuge: {self._co_titular['cpf']}," if self._co_titular else ""
         )  # noqa
-        return f"Cliente: {documento}, {co_titular} Agência: {self._agencia}, Conta: {self._numero_conta}, Saldo: R$ {self._saldo:.2f}, {encerramento}"  # noqa
+        responsavel = (
+            f"Responsável: {self._responsavel['cpf']},"
+            if self._responsavel
+            else ""  # noqa
+        )  # noqa
+        return f"Cliente: {documento}, {co_titular}{responsavel} Agência: {self._agencia}, Conta: {self._numero_conta}, Saldo: R$ {self._saldo:.2f}, {encerramento}"  # noqa

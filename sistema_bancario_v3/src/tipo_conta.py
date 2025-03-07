@@ -1,4 +1,4 @@
-from .conta import Conta
+from src.conta import Conta
 
 
 class ContaCorrente(Conta):
@@ -63,6 +63,10 @@ class ContaMenorIdade(Conta):
 
     def deposito_inicial(self):
         return 10
+
+    @property
+    def responsavel(self):
+        return self._responsavel
 
 
 class ContaJuridicaCorrente(Conta):

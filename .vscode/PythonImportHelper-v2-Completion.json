@@ -1,10 +1,178 @@
 [
     {
-        "label": "List",
-        "importPath": "typing",
-        "description": "typing",
+        "label": "validar_documento",
+        "importPath": "src.validators",
+        "description": "src.validators",
         "isExtraImport": true,
-        "detail": "typing",
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_numero_conta",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_data",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_documento",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_endereco",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_nome",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_data",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_documento",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_documento",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_nome",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_data",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "validar_endereco",
+        "importPath": "src.validators",
+        "description": "src.validators",
+        "isExtraImport": true,
+        "detail": "src.validators",
+        "documentation": {}
+    },
+    {
+        "label": "atualizar_usuario",
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "isExtraImport": true,
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "encontrar_usuario",
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "isExtraImport": true,
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "exibir_dados_usuario",
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "isExtraImport": true,
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "obter_documento",
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "isExtraImport": true,
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "obter_novos_dados",
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "isExtraImport": true,
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "encontrar_usuario",
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "isExtraImport": true,
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "documento_existe",
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "isExtraImport": true,
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "documento_existe",
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "isExtraImport": true,
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "encontrar_usuario",
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "isExtraImport": true,
+        "detail": "src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "exibir_dados_usuario",
+        "importPath": "src.utils",
+        "description": "src.utils",
+        "isExtraImport": true,
+        "detail": "src.utils",
         "documentation": {}
     },
     {
@@ -16,6 +184,22 @@
         "documentation": {}
     },
     {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "datetime",
         "importPath": "datetime",
         "description": "datetime",
@@ -109,6 +293,54 @@
         "description": "abc",
         "isExtraImport": true,
         "detail": "abc",
+        "documentation": {}
+    },
+    {
+        "label": "Historico",
+        "importPath": "src.transacao",
+        "description": "src.transacao",
+        "isExtraImport": true,
+        "detail": "src.transacao",
+        "documentation": {}
+    },
+    {
+        "label": "Deposito",
+        "importPath": "src.transacao",
+        "description": "src.transacao",
+        "isExtraImport": true,
+        "detail": "src.transacao",
+        "documentation": {}
+    },
+    {
+        "label": "Deposito",
+        "importPath": "src.transacao",
+        "description": "src.transacao",
+        "isExtraImport": true,
+        "detail": "src.transacao",
+        "documentation": {}
+    },
+    {
+        "label": "Saque",
+        "importPath": "src.transacao",
+        "description": "src.transacao",
+        "isExtraImport": true,
+        "detail": "src.transacao",
+        "documentation": {}
+    },
+    {
+        "label": "Deposito",
+        "importPath": "src.transacao",
+        "description": "src.transacao",
+        "isExtraImport": true,
+        "detail": "src.transacao",
+        "documentation": {}
+    },
+    {
+        "label": "Saque",
+        "importPath": "src.transacao",
+        "description": "src.transacao",
+        "isExtraImport": true,
+        "detail": "src.transacao",
         "documentation": {}
     },
     {
@@ -141,6 +373,46 @@
         "description": "src.cliente",
         "isExtraImport": true,
         "detail": "src.cliente",
+        "documentation": {}
+    },
+    {
+        "label": "Cliente",
+        "importPath": "src.cliente",
+        "description": "src.cliente",
+        "isExtraImport": true,
+        "detail": "src.cliente",
+        "documentation": {}
+    },
+    {
+        "label": "PessoaFisica",
+        "importPath": "src.cliente",
+        "description": "src.cliente",
+        "isExtraImport": true,
+        "detail": "src.cliente",
+        "documentation": {}
+    },
+    {
+        "label": "PessoaJuridica",
+        "importPath": "src.cliente",
+        "description": "src.cliente",
+        "isExtraImport": true,
+        "detail": "src.cliente",
+        "documentation": {}
+    },
+    {
+        "label": "Conta",
+        "importPath": "src.conta",
+        "description": "src.conta",
+        "isExtraImport": true,
+        "detail": "src.conta",
+        "documentation": {}
+    },
+    {
+        "label": "Conta",
+        "importPath": "src.conta",
+        "description": "src.conta",
+        "isExtraImport": true,
+        "detail": "src.conta",
         "documentation": {}
     },
     {
@@ -232,28 +504,84 @@
         "documentation": {}
     },
     {
+        "label": "ContaConjunta",
+        "importPath": "src.tipo_conta",
+        "description": "src.tipo_conta",
+        "isExtraImport": true,
+        "detail": "src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaCorrente",
+        "importPath": "src.tipo_conta",
+        "description": "src.tipo_conta",
+        "isExtraImport": true,
+        "detail": "src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaJuridicaCorrente",
+        "importPath": "src.tipo_conta",
+        "description": "src.tipo_conta",
+        "isExtraImport": true,
+        "detail": "src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaJuridicaPoupanca",
+        "importPath": "src.tipo_conta",
+        "description": "src.tipo_conta",
+        "isExtraImport": true,
+        "detail": "src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaMenorIdade",
+        "importPath": "src.tipo_conta",
+        "description": "src.tipo_conta",
+        "isExtraImport": true,
+        "detail": "src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaPoupanca",
+        "importPath": "src.tipo_conta",
+        "description": "src.tipo_conta",
+        "isExtraImport": true,
+        "detail": "src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaSalario",
+        "importPath": "src.tipo_conta",
+        "description": "src.tipo_conta",
+        "isExtraImport": true,
+        "detail": "src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaUniversitaria",
+        "importPath": "src.tipo_conta",
+        "description": "src.tipo_conta",
+        "isExtraImport": true,
+        "detail": "src.tipo_conta",
+        "documentation": {}
+    },
+    {
+        "label": "ContaFactory",
+        "importPath": "src.conta_factory",
+        "description": "src.conta_factory",
+        "isExtraImport": true,
+        "detail": "src.conta_factory",
+        "documentation": {}
+    },
+    {
         "label": "re",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "re",
         "description": "re",
         "detail": "re",
-        "documentation": {}
-    },
-    {
-        "label": "Deposito",
-        "importPath": "src.transacao",
-        "description": "src.transacao",
-        "isExtraImport": true,
-        "detail": "src.transacao",
-        "documentation": {}
-    },
-    {
-        "label": "Saque",
-        "importPath": "src.transacao",
-        "description": "src.transacao",
-        "isExtraImport": true,
-        "detail": "src.transacao",
         "documentation": {}
     },
     {
@@ -275,67 +603,11 @@
         "documentation": {}
     },
     {
-        "label": "documento_existe",
-        "importPath": "src.utils",
-        "description": "src.utils",
-        "isExtraImport": true,
-        "detail": "src.utils",
-        "documentation": {}
-    },
-    {
-        "label": "encontrar_usuario",
-        "importPath": "src.utils",
-        "description": "src.utils",
-        "isExtraImport": true,
-        "detail": "src.utils",
-        "documentation": {}
-    },
-    {
-        "label": "exibir_dados_usuario",
-        "importPath": "src.utils",
-        "description": "src.utils",
-        "isExtraImport": true,
-        "detail": "src.utils",
-        "documentation": {}
-    },
-    {
-        "label": "validar_documento",
-        "importPath": "src.validators",
-        "description": "src.validators",
-        "isExtraImport": true,
-        "detail": "src.validators",
-        "documentation": {}
-    },
-    {
-        "label": "validar_nome",
-        "importPath": "src.validators",
-        "description": "src.validators",
-        "isExtraImport": true,
-        "detail": "src.validators",
-        "documentation": {}
-    },
-    {
-        "label": "validar_data",
-        "importPath": "src.validators",
-        "description": "src.validators",
-        "isExtraImport": true,
-        "detail": "src.validators",
-        "documentation": {}
-    },
-    {
-        "label": "validar_endereco",
-        "importPath": "src.validators",
-        "description": "src.validators",
-        "isExtraImport": true,
-        "detail": "src.validators",
-        "documentation": {}
-    },
-    {
         "label": "Cliente",
         "kind": 6,
         "importPath": "sistema_bancario_v3.src.cliente",
         "description": "sistema_bancario_v3.src.cliente",
-        "peekOfCode": "class Cliente:\n    clientes: list[dict] = []\n    def __init__(self, endereco):\n        self._endereco = endereco\n        self._contas = []\n    @classmethod\n    def adicionar_conta(cls, usuario, conta):\n        for cliente in cls.clientes:\n            if cliente.get(\"cpf\") == usuario.get(\"cpf\") or cliente.get(\n                \"cnpj\"",
+        "peekOfCode": "class Cliente:\n    clientes: list[dict] = []\n    def __init__(self, endereco):\n        self._endereco = endereco\n        self._contas = []\n    @classmethod\n    def adicionar_conta(cls, usuario, conta):\n        print(\"conta\", conta.__dict__)\n        print(\"usuario\", usuario)\n        for cliente in cls.clientes:",
         "detail": "sistema_bancario_v3.src.cliente",
         "documentation": {}
     },
@@ -367,11 +639,65 @@
         "documentation": {}
     },
     {
+        "label": "ContaFactory",
+        "kind": 6,
+        "importPath": "sistema_bancario_v3.src.conta_factory",
+        "description": "sistema_bancario_v3.src.conta_factory",
+        "peekOfCode": "class ContaFactory:\n    @staticmethod\n    def criar_conta(usuarios):\n        documento = ContaFactory._obter_documento_usuario()\n        usuario = encontrar_usuario(usuarios, documento)\n        if not usuario:\n            print(\"\\n 🔔 Usuário não encontrado! Cadastre-o primeiro.\\n\")\n            return\n        if not ContaFactory._validar_idade_usuario(usuario):\n            responsavel = ContaFactory._obter_responsavel(documento, usuario)",
+        "detail": "sistema_bancario_v3.src.conta_factory",
+        "documentation": {}
+    },
+    {
         "label": "menu_principal",
         "kind": 2,
         "importPath": "sistema_bancario_v3.src.main",
         "description": "sistema_bancario_v3.src.main",
         "peekOfCode": "def menu_principal():\n    usuarios = Cliente.clientes\n    while True:\n        option = input(\n            \"\\nBem-vindo(a) ao Banco Python!\\nEscolha uma opção:\\n\\n\"\n            \"[0] - Saldo\\n[1] - Saque\\n[2] - Depósito\\n[3] - Extrato\\n[4] - Criar Usuário\\n[5] - Editar Usuários\\n\"  # noqa\n            \"[6] - Listar Usuários\\n[7] - Criar Conta\\n[8] - Listar Contas\\n[9] - Encerrar Conta\\n[10] - Sair\\n\\n\"  # noqa\n            \"Digite o número da opção desejada: \"\n        )\n        if option == \"0\":",
+        "detail": "sistema_bancario_v3.src.main",
+        "documentation": {}
+    },
+    {
+        "label": "exibir_saldo",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.main",
+        "description": "sistema_bancario_v3.src.main",
+        "peekOfCode": "def exibir_saldo():\n    conta = Conta.obter_conta()\n    if conta:\n        conta.exibir_saldo()\ndef realizar_saque():\n    conta = Conta.obter_conta()\n    if conta:\n        valor = float(input(\"Digite o valor do saque: R$ \"))\n        transacao = Saque(valor)\n        transacao.registrar(conta)",
+        "detail": "sistema_bancario_v3.src.main",
+        "documentation": {}
+    },
+    {
+        "label": "realizar_saque",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.main",
+        "description": "sistema_bancario_v3.src.main",
+        "peekOfCode": "def realizar_saque():\n    conta = Conta.obter_conta()\n    if conta:\n        valor = float(input(\"Digite o valor do saque: R$ \"))\n        transacao = Saque(valor)\n        transacao.registrar(conta)\ndef realizar_deposito():\n    conta = Conta.obter_conta()\n    if conta:\n        valor = float(input(\"Digite o valor do depósito: R$ \"))",
+        "detail": "sistema_bancario_v3.src.main",
+        "documentation": {}
+    },
+    {
+        "label": "realizar_deposito",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.main",
+        "description": "sistema_bancario_v3.src.main",
+        "peekOfCode": "def realizar_deposito():\n    conta = Conta.obter_conta()\n    if conta:\n        valor = float(input(\"Digite o valor do depósito: R$ \"))\n        transacao = Deposito(valor)\n        transacao.registrar(conta)\ndef exibir_extrato():\n    conta = Conta.obter_conta()\n    if conta:\n        conta.exibir_extrato()",
+        "detail": "sistema_bancario_v3.src.main",
+        "documentation": {}
+    },
+    {
+        "label": "exibir_extrato",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.main",
+        "description": "sistema_bancario_v3.src.main",
+        "peekOfCode": "def exibir_extrato():\n    conta = Conta.obter_conta()\n    if conta:\n        conta.exibir_extrato()\ndef criar_usuario(usuarios):\n    while True:\n        documento = input(\"Digite o CPF ou CNPJ do usuário: \")\n        valido, mensagem = validar_documento(documento)\n        if not valido:\n            print(f\"\\n{mensagem}\\n\")",
+        "detail": "sistema_bancario_v3.src.main",
+        "documentation": {}
+    },
+    {
+        "label": "criar_usuario",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.main",
+        "description": "sistema_bancario_v3.src.main",
+        "peekOfCode": "def criar_usuario(usuarios):\n    while True:\n        documento = input(\"Digite o CPF ou CNPJ do usuário: \")\n        valido, mensagem = validar_documento(documento)\n        if not valido:\n            print(f\"\\n{mensagem}\\n\")\n            continue\n        break\n    if documento_existe(documento, usuarios):\n        if len(documento) == 11:",
         "detail": "sistema_bancario_v3.src.main",
         "documentation": {}
     },
@@ -425,7 +751,7 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3.src.tipo_conta",
         "description": "sistema_bancario_v3.src.tipo_conta",
-        "peekOfCode": "class ContaMenorIdade(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", responsavel=None):  # noqa\n        super().__init__(cliente, numero_conta, agencia)\n        self._responsavel = responsavel\n    def deposito_inicial(self):\n        return 10\nclass ContaJuridicaCorrente(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", limite=1000):\n        super().__init__(cliente, numero_conta, agencia)\n        self._limite = limite",
+        "peekOfCode": "class ContaMenorIdade(Conta):\n    def __init__(self, cliente, numero_conta, agencia=\"0001\", responsavel=None):  # noqa\n        super().__init__(cliente, numero_conta, agencia)\n        self._responsavel = responsavel\n    def deposito_inicial(self):\n        return 10\n    @property\n    def responsavel(self):\n        return self._responsavel\nclass ContaJuridicaCorrente(Conta):",
         "detail": "sistema_bancario_v3.src.tipo_conta",
         "documentation": {}
     },
@@ -488,7 +814,25 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3.src.utils",
         "description": "sistema_bancario_v3.src.utils",
-        "peekOfCode": "def documento_existe(documento, clientes):\n    return any(\n        cliente.get(\"cpf\") == documento or cliente.get(\"cnpj\") == documento\n        for cliente in clientes\n    )\ndef encontrar_usuario(usuarios, documento):\n    return next(\n        (\n            u\n            for u in usuarios",
+        "peekOfCode": "def documento_existe(documento, clientes):\n    return any(\n        cliente.get(\"cpf\") == documento or cliente.get(\"cnpj\") == documento\n        for cliente in clientes\n    )\ndef obter_documento():\n    documento = input(\n        \"Digite o CPF ou CNPJ do usuário a ser editado (somente números): \"\n    )\n    return documento.replace(\".\", \"\").replace(\"-\", \"\").strip()",
+        "detail": "sistema_bancario_v3.src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "obter_documento",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.utils",
+        "description": "sistema_bancario_v3.src.utils",
+        "peekOfCode": "def obter_documento():\n    documento = input(\n        \"Digite o CPF ou CNPJ do usuário a ser editado (somente números): \"\n    )\n    return documento.replace(\".\", \"\").replace(\"-\", \"\").strip()\ndef obter_novos_dados(usuario):\n    print(\n        \"Digite os novos dados do usuário (deixe em branco para manter o valor atual):\"  # noqa\n    )\n    novo_nome = input(f\"Nome [{usuario['nome']}]: \").strip()",
+        "detail": "sistema_bancario_v3.src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "obter_novos_dados",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.utils",
+        "description": "sistema_bancario_v3.src.utils",
+        "peekOfCode": "def obter_novos_dados(usuario):\n    print(\n        \"Digite os novos dados do usuário (deixe em branco para manter o valor atual):\"  # noqa\n    )\n    novo_nome = input(f\"Nome [{usuario['nome']}]: \").strip()\n    data_label = (\n        \"Data de Nascimento\" if \"cpf\" in usuario else \"Data de Abertura\"\n    )  # noqa\n    nova_data = input(\n        f\"{data_label} [{usuario.get('data_nascimento', usuario.get('data_abertura'))}]: \"  # noqa",
         "detail": "sistema_bancario_v3.src.utils",
         "documentation": {}
     },
@@ -497,7 +841,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3.src.utils",
         "description": "sistema_bancario_v3.src.utils",
-        "peekOfCode": "def encontrar_usuario(usuarios, documento):\n    return next(\n        (\n            u\n            for u in usuarios\n            if (\"cpf\" in u and u[\"cpf\"] == documento)\n            or (\"cnpj\" in u and u[\"cnpj\"] == documento)\n        ),\n        None,\n    )",
+        "peekOfCode": "def encontrar_usuario(usuarios, documento):\n    return next(\n        (\n            u\n            for u in usuarios\n            if isinstance(u, dict) and \"cpf\" in u and u[\"cpf\"] == documento\n        ),\n        None,\n    )\ndef exibir_dados_usuario(usuario):",
         "detail": "sistema_bancario_v3.src.utils",
         "documentation": {}
     },
@@ -511,11 +855,29 @@
         "documentation": {}
     },
     {
+        "label": "atualizar_usuario",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.utils",
+        "description": "sistema_bancario_v3.src.utils",
+        "peekOfCode": "def atualizar_usuario(usuario, novo_nome, nova_data, novo_endereco):\n    if novo_nome:\n        usuario[\"nome\"] = novo_nome\n    if nova_data:\n        if \"cpf\" in usuario:\n            usuario[\"data_nascimento\"] = nova_data\n        else:\n            usuario[\"data_abertura\"] = nova_data\n    if novo_endereco:\n        usuario[\"endereco\"] = novo_endereco",
+        "detail": "sistema_bancario_v3.src.utils",
+        "documentation": {}
+    },
+    {
+        "label": "editar_usuario",
+        "kind": 2,
+        "importPath": "sistema_bancario_v3.src.utils",
+        "description": "sistema_bancario_v3.src.utils",
+        "peekOfCode": "def editar_usuario(usuarios):\n    documento = obter_documento()\n    valido, mensagem = validar_documento(documento)\n    if not valido:\n        print(f\"\\n{mensagem}\\n\")\n        return\n    usuario = encontrar_usuario(usuarios, documento)\n    if not usuario:\n        print(\"\\n\\n❌ Usuário não encontrado!\\n\\n\")\n        return",
+        "detail": "sistema_bancario_v3.src.utils",
+        "documentation": {}
+    },
+    {
         "label": "validar_documento",
         "kind": 2,
         "importPath": "sistema_bancario_v3.src.validators",
         "description": "sistema_bancario_v3.src.validators",
-        "peekOfCode": "def validar_documento(documento):\n    if not documento:\n        return False, \"Documento não pode ser vazio.\"\n    if len(documento) < 11:\n        return False, \"Documento deve ter pelo menos 11 caracteres.\"\n    if len(documento) > 14:\n        return False, \"Documento deve ter no máximo 14 caracteres.\"\n    return True, \"\"\ndef validar_nome(nome):\n    if not nome:",
+        "peekOfCode": "def validar_documento(documento):\n    if not documento:\n        return False, \"❌ Documento não pode ser vazio.\"\n    if len(documento) < 11:\n        return False, \"❌ Documento deve ter pelo menos 11 caracteres.\"\n    if len(documento) > 14:\n        return False, \"❌ Documento deve ter no máximo 14 caracteres.\"\n    return True, \"\"\ndef validar_nome(nome):\n    if not nome:",
         "detail": "sistema_bancario_v3.src.validators",
         "documentation": {}
     },
@@ -524,7 +886,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3.src.validators",
         "description": "sistema_bancario_v3.src.validators",
-        "peekOfCode": "def validar_nome(nome):\n    if not nome:\n        return False, \"Nome não pode ser vazio.\"\n    return True, \"\"\ndef validar_data(data):\n    if not data:\n        return False, \"Data não pode ser vazia.\"\n    try:\n        datetime.strptime(data, \"%d/%m/%Y\")\n    except ValueError:",
+        "peekOfCode": "def validar_nome(nome):\n    if not nome:\n        return False, \"❌ Nome não pode ser vazio.\"\n    return True, \"\"\ndef validar_data(data, eEdicao=False):\n    if eEdicao and not data:\n        return True, \"\"\n    elif not data:\n        return False, \"❌ Data não pode ser vazia.\"\n    try:",
         "detail": "sistema_bancario_v3.src.validators",
         "documentation": {}
     },
@@ -533,7 +895,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3.src.validators",
         "description": "sistema_bancario_v3.src.validators",
-        "peekOfCode": "def validar_data(data):\n    if not data:\n        return False, \"Data não pode ser vazia.\"\n    try:\n        datetime.strptime(data, \"%d/%m/%Y\")\n    except ValueError:\n        return False, \"Data deve estar no formato dd/mm/aaaa.\"\n    return True, \"\"\ndef validar_endereco(endereco):\n    if not endereco:",
+        "peekOfCode": "def validar_data(data, eEdicao=False):\n    if eEdicao and not data:\n        return True, \"\"\n    elif not data:\n        return False, \"❌ Data não pode ser vazia.\"\n    try:\n        datetime.strptime(data, \"%d/%m/%Y\")\n    except ValueError:\n        return False, \"❌ Data deve estar no formato dd/mm/aaaa.\"\n    return True, \"\"",
         "detail": "sistema_bancario_v3.src.validators",
         "documentation": {}
     },
@@ -542,7 +904,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3.src.validators",
         "description": "sistema_bancario_v3.src.validators",
-        "peekOfCode": "def validar_endereco(endereco):\n    if not endereco:\n        return False, \"Endereço não pode ser vazio.\"\n    return True, \"\"\ndef validar_numero_conta(numero):\n    if not re.match(r\"^\\d{3}/\\d$\", numero):\n        return False, \"Número da conta deve estar no formato XXX/X.\"\n    return True, \"\"",
+        "peekOfCode": "def validar_endereco(endereco):\n    if not endereco:\n        return False, \"❌ Endereço não pode ser vazio.\"\n    return True, \"\"\ndef validar_numero_conta(numero):\n    if not re.match(r\"^\\d{3}/\\d$\", numero):\n        return False, \"❌ Número da conta deve estar no formato XXX/X.\"\n    return True, \"\"",
         "detail": "sistema_bancario_v3.src.validators",
         "documentation": {}
     },
@@ -551,7 +913,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3.src.validators",
         "description": "sistema_bancario_v3.src.validators",
-        "peekOfCode": "def validar_numero_conta(numero):\n    if not re.match(r\"^\\d{3}/\\d$\", numero):\n        return False, \"Número da conta deve estar no formato XXX/X.\"\n    return True, \"\"",
+        "peekOfCode": "def validar_numero_conta(numero):\n    if not re.match(r\"^\\d{3}/\\d$\", numero):\n        return False, \"❌ Número da conta deve estar no formato XXX/X.\"\n    return True, \"\"",
         "detail": "sistema_bancario_v3.src.validators",
         "documentation": {}
     },
