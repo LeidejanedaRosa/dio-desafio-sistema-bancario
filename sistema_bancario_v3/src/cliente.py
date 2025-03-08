@@ -9,28 +9,58 @@ from src.utils import (
 
 
 class Cliente:
-    clientes: list[dict] = []
+    clientes: list[dict] = [
+        {
+            "cpf": "12345678911",
+            "nome": "Maria Alice Nascimento da Rosa",
+            "endereco": "Via Silvestre Ferraz, 175 - Carioca - São Lourenço/MG",
+            "data_nascimento": "17/08/2018",
+        },
+        {
+            "cpf": "08062655741",
+            "nome": "Frederico Carlos da Rosa",
+            "endereco": "Via Silvestre Ferraz, 175 - Carioca - São Lourenço/MG",
+            "data_nascimento": "14/04/1978",
+        },
+        {
+            "cpf": "08368795702",
+            "nome": "Leidejane da Silva Nascimento da Rosa",
+            "endereco": "Via Silvestre Ferraz, 175 - Carioca - São Lourenço/MG",
+            "data_nascimento": "03/05/1981",
+        },
+    ]
 
     def __init__(self, endereco):
         self._endereco = endereco
         self._contas = []
 
     @classmethod
-    def adicionar_conta(cls, usuario, conta):
-        print("conta", conta.__dict__)
-        print("usuario", usuario)
-        for cliente in cls.clientes:
-            if cliente.get("cpf") == usuario.get(
-                "cpf"
-            ) or cliente.get(  # aqui eu testo se o cliente tem o mesmo cpf ou cnpj que o usuario
-                "cnpj"  # posso testar o mesmo para co_titular e responsavel
-            ) == usuario.get(
-                "cnpj"
-            ):
-                if "contas" not in cliente:
-                    cliente["contas"] = []
-                if conta not in cliente["contas"]:
-                    cliente["contas"].append(conta)
+    def adicionar_conta(cls, conta):
+
+        documento_cliente = conta._cliente["cpf"] if conta._cliente else None
+        conjuge_responsavel = (conta._co_titular and conta._co_titular.get("cpf")) or (
+            conta._responsavel and conta._responsavel.get("cpf")
+        )
+
+        print("documento_cliente ---------------> ", documento_cliente)
+        print("conjuge_responsavel ---------------> ", conjuge_responsavel)
+
+        # Encontrar os clientes na lista
+        cliente_principal = next(
+            (c for c in cls.clientes if c.get("cpf") == documento_cliente), None  # noqa
+        )
+        conjuge_responsavel = next(
+            (c for c in cls.clientes if c.get("cpf") == conjuge_responsavel),
+            None,  # noqa
+        )
+
+        if cliente_principal:
+            cliente_principal.setdefault("contas", []).append(conta)
+
+        if conjuge_responsavel:
+            conjuge_responsavel.setdefault("contas", []).append(conta)
+
+        print("cls.clientes ---------------> ", cls.clientes)
 
     def realizar_transacao(self, conta, transacao):
         transacao.registrar(conta)

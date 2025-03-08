@@ -45,7 +45,11 @@ def encontrar_usuario(usuarios, documento):
         (
             u
             for u in usuarios
-            if isinstance(u, dict) and "cpf" in u and u["cpf"] == documento
+            if isinstance(u, dict)
+            and (
+                ("cpf" in u and u["cpf"] == documento)
+                or ("cnpj" in u and u["cnpj"] == documento)
+            )
         ),
         None,
     )

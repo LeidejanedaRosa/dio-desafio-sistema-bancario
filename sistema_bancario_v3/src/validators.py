@@ -4,15 +4,15 @@ from datetime import datetime
 
 def validar_documento(documento):
     if not documento:
-        return False, "❌ Documento não pode ser vazio."
+        return False, "❌ Documento é obrigatório."
 
-    if len(documento) < 11:
-        return False, "❌ Documento deve ter pelo menos 11 caracteres."
-
-    if len(documento) > 14:
-        return False, "❌ Documento deve ter no máximo 14 caracteres."
-
-    return True, ""
+    if len(documento) == 11 or len(documento) == 14:
+        return True, ""
+    else:
+        return (
+            False,
+            "❌ Documento inválido. Deve conter 11 (CPF) ou 14 (CNPJ) dígitos.",
+        )
 
 
 def validar_nome(nome):
@@ -26,10 +26,16 @@ def validar_data(data, eEdicao=False):
     if eEdicao and not data:
         return True, ""
     elif not data:
-        return False, "❌ Data não pode ser vazia."
+        return False, "❌ Data é obrigatória."
 
     try:
-        datetime.strptime(data, "%d/%m/%Y")
+        data_nascimento = datetime.strptime(data, "%d/%m/%Y")
+        data_atual = datetime.today()
+
+        # Verifica se a data informada é no futuro
+        if data_nascimento > data_atual:
+            return False, "❌ Data de nascimento não pode ser no futuro."
+
     except ValueError:
         return False, "❌ Data deve estar no formato dd/mm/aaaa."
 

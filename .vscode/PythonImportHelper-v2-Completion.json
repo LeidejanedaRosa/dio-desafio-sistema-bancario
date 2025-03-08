@@ -607,7 +607,7 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3.src.cliente",
         "description": "sistema_bancario_v3.src.cliente",
-        "peekOfCode": "class Cliente:\n    clientes: list[dict] = []\n    def __init__(self, endereco):\n        self._endereco = endereco\n        self._contas = []\n    @classmethod\n    def adicionar_conta(cls, usuario, conta):\n        print(\"conta\", conta.__dict__)\n        print(\"usuario\", usuario)\n        for cliente in cls.clientes:",
+        "peekOfCode": "class Cliente:\n    clientes: list[dict] = [\n        {\n            \"cpf\": \"12345678911\",\n            \"nome\": \"Maria Alice Nascimento da Rosa\",\n            \"endereco\": \"Via Silvestre Ferraz, 175 - Carioca - São Lourenço/MG\",\n            \"data_nascimento\": \"17/08/2018\",\n        },\n        {\n            \"cpf\": \"08062655741\",",
         "detail": "sistema_bancario_v3.src.cliente",
         "documentation": {}
     },
@@ -643,7 +643,7 @@
         "kind": 6,
         "importPath": "sistema_bancario_v3.src.conta_factory",
         "description": "sistema_bancario_v3.src.conta_factory",
-        "peekOfCode": "class ContaFactory:\n    @staticmethod\n    def criar_conta(usuarios):\n        documento = ContaFactory._obter_documento_usuario()\n        usuario = encontrar_usuario(usuarios, documento)\n        if not usuario:\n            print(\"\\n 🔔 Usuário não encontrado! Cadastre-o primeiro.\\n\")\n            return\n        if not ContaFactory._validar_idade_usuario(usuario):\n            responsavel = ContaFactory._obter_responsavel(documento, usuario)",
+        "peekOfCode": "class ContaFactory:\n    @staticmethod\n    def criar_conta(usuarios):\n        documento = ContaFactory._obter_documento_usuario()\n        usuario = encontrar_usuario(usuarios, documento)\n        if not usuario:\n            print(\"\\n 🔔 Usuário não encontrado! Cadastre-o primeiro.\\n\")\n            return\n        responsavel = None\n        valido, mensagem = ContaFactory._validar_idade_usuario(usuario)",
         "detail": "sistema_bancario_v3.src.conta_factory",
         "documentation": {}
     },
@@ -841,7 +841,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3.src.utils",
         "description": "sistema_bancario_v3.src.utils",
-        "peekOfCode": "def encontrar_usuario(usuarios, documento):\n    return next(\n        (\n            u\n            for u in usuarios\n            if isinstance(u, dict) and \"cpf\" in u and u[\"cpf\"] == documento\n        ),\n        None,\n    )\ndef exibir_dados_usuario(usuario):",
+        "peekOfCode": "def encontrar_usuario(usuarios, documento):\n    return next(\n        (\n            u\n            for u in usuarios\n            if isinstance(u, dict)\n            and (\n                (\"cpf\" in u and u[\"cpf\"] == documento)\n                or (\"cnpj\" in u and u[\"cnpj\"] == documento)\n            )",
         "detail": "sistema_bancario_v3.src.utils",
         "documentation": {}
     },
@@ -877,7 +877,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3.src.validators",
         "description": "sistema_bancario_v3.src.validators",
-        "peekOfCode": "def validar_documento(documento):\n    if not documento:\n        return False, \"❌ Documento não pode ser vazio.\"\n    if len(documento) < 11:\n        return False, \"❌ Documento deve ter pelo menos 11 caracteres.\"\n    if len(documento) > 14:\n        return False, \"❌ Documento deve ter no máximo 14 caracteres.\"\n    return True, \"\"\ndef validar_nome(nome):\n    if not nome:",
+        "peekOfCode": "def validar_documento(documento):\n    if not documento:\n        return False, \"❌ Documento é obrigatório.\"\n    if len(documento) == 11 or len(documento) == 14:\n        return True, \"\"\n    else:\n        return (\n            False,\n            \"❌ Documento inválido. Deve conter 11 (CPF) ou 14 (CNPJ) dígitos.\",\n        )",
         "detail": "sistema_bancario_v3.src.validators",
         "documentation": {}
     },
@@ -886,7 +886,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3.src.validators",
         "description": "sistema_bancario_v3.src.validators",
-        "peekOfCode": "def validar_nome(nome):\n    if not nome:\n        return False, \"❌ Nome não pode ser vazio.\"\n    return True, \"\"\ndef validar_data(data, eEdicao=False):\n    if eEdicao and not data:\n        return True, \"\"\n    elif not data:\n        return False, \"❌ Data não pode ser vazia.\"\n    try:",
+        "peekOfCode": "def validar_nome(nome):\n    if not nome:\n        return False, \"❌ Nome não pode ser vazio.\"\n    return True, \"\"\ndef validar_data(data, eEdicao=False):\n    if eEdicao and not data:\n        return True, \"\"\n    elif not data:\n        return False, \"❌ Data é obrigatória.\"\n    try:",
         "detail": "sistema_bancario_v3.src.validators",
         "documentation": {}
     },
@@ -895,7 +895,7 @@
         "kind": 2,
         "importPath": "sistema_bancario_v3.src.validators",
         "description": "sistema_bancario_v3.src.validators",
-        "peekOfCode": "def validar_data(data, eEdicao=False):\n    if eEdicao and not data:\n        return True, \"\"\n    elif not data:\n        return False, \"❌ Data não pode ser vazia.\"\n    try:\n        datetime.strptime(data, \"%d/%m/%Y\")\n    except ValueError:\n        return False, \"❌ Data deve estar no formato dd/mm/aaaa.\"\n    return True, \"\"",
+        "peekOfCode": "def validar_data(data, eEdicao=False):\n    if eEdicao and not data:\n        return True, \"\"\n    elif not data:\n        return False, \"❌ Data é obrigatória.\"\n    try:\n        data_nascimento = datetime.strptime(data, \"%d/%m/%Y\")\n        data_atual = datetime.today()\n        # Verifica se a data informada é no futuro\n        if data_nascimento > data_atual:",
         "detail": "sistema_bancario_v3.src.validators",
         "documentation": {}
     },

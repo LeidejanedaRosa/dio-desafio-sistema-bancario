@@ -25,11 +25,24 @@ class ContaFactory:
             print("\n 🔔 Usuário não encontrado! Cadastre-o primeiro.\n")
             return
 
-        if not ContaFactory._validar_idade_usuario(usuario):
-            responsavel = ContaFactory._obter_responsavel(documento, usuario)
-            if not ContaFactory.verificar_usuario_possui_conta_ativa(responsavel):
+        responsavel = None
+        valido, mensagem = ContaFactory._validar_idade_usuario(usuario)
+
+        if not valido:
+            print(mensagem)
+            responsavel = ContaFactory._obter_responsavel(usuarios)
+            if not responsavel:
+                print("\n🔔 Responsável não encontrado! Cadastre-o primeiro.\n")  # noqa
+                return
+            if not ContaFactory._validar_usuario_diferente_titular(
+                usuario["cpf"], responsavel["cpf"], "responsável"
+            ):
+                return
+            if not ContaFactory.verificar_usuario_possui_conta_ativa(
+                responsavel
+            ):  # noqa
                 print(
-                    "\n❌ Responsável não possui conta ativa! Precisa abrir uma conta primeiro.\n"
+                    "\n❌ Responsável não possui conta ativa! Precisa abrir uma conta primeiro.\n"  # noqa
                 )
                 return
             print("\nResponsável encontrado. Continuando...\n")
@@ -40,30 +53,48 @@ class ContaFactory:
 
         co_titular = None
         if tipo_conta == "5":  # Conta Conjunta
-            co_titular = ContaFactory._obter_co_titular(documento, usuarios)
+            co_titular = ContaFactory._obter_co_titular(usuarios)
             if not co_titular:
+                print("\n🔔 Cônjuge não encontrado! Cadastre-o primeiro.\n")
+                return
+            if not ContaFactory._validar_usuario_diferente_titular(
+                usuario["cpf"], co_titular["cpf"], "cônjuge"
+            ):
                 return
 
-        conta = ContaFactory._criar_instancia_conta(tipo_conta, usuario, co_titular)
+            valido, mensagem = ContaFactory._validar_idade_usuario(co_titular)
+            if not valido:
+                print("\n❌ Cônjuge não pode ser menor de idade. \n")
+                return
+
+        conta = (
+            ContaFactory._criar_instancia_conta(
+                tipo_conta, usuario, co_titular, responsavel
+            )
+            if tipo_conta in ["5", "6"]
+            else ContaFactory._criar_instancia_conta(tipo_conta, usuario)
+        )  # noqa
         if not conta:
             return
 
         ContaFactory._realizar_deposito_inicial(conta)
         Conta.contas.append(conta)
-        Cliente.adicionar_conta(usuario, conta)
-        if tipo_conta == "5":  # Conta Conjunta
-            Cliente.adicionar_conta(co_titular, conta)
+        Cliente.adicionar_conta(conta)
 
         print("\n✅ Conta criada com sucesso!\n")
 
     @staticmethod
     def _validar_idade_usuario(usuario):
-        data_nascimento = datetime.strptime(usuario["data_nascimento"], "%d/%m/%Y")
+        data_nascimento = datetime.strptime(
+            usuario["data_nascimento"], "%d/%m/%Y"
+        )  # noqa
         idade = (datetime.now() - data_nascimento).days // 365
         if idade < 18:
-            print("\n🔔 Usuário menor de idade. Informe o responsável...\n")
-            return False
-        return True
+            return (
+                False,
+                "\n🔔 Usuário menor de idade. Informe o responsável...\n",
+            )  # noqa
+        return True, ""
 
     @staticmethod
     def _obter_documento_usuario():
@@ -129,33 +160,36 @@ class ContaFactory:
         for conta in Conta.contas:
             if conta._cliente == usuario and conta.verificar_conta_ativa():
                 return True
-        print(
-            f"\n❌ {usuario['tipo_usuario'].capitalize()} não possui conta ativa!\n"  # noqa
-        )  # noqa
         return False
 
     @staticmethod
-    def _obter_usuario(tipo_usuario, documento, usuarios):
-        usuario_documento = input(f"Digite o CPF do {tipo_usuario}: ")
-        return encontrar_usuario(usuarios, usuario_documento)
+    def _obter_usuario(tipo_usuario, usuarios):
+        cpf = input(f"Digite o CPF do {tipo_usuario}: ")
+        usuario = encontrar_usuario(usuarios, cpf)
+        return usuario
 
     @staticmethod
-    def _validar_usuario_diferente_titular(usuario_documento, documento, tipo_usuario):
+    def _validar_usuario_diferente_titular(
+        usuario_documento, documento, tipo_usuario
+    ):  # noqa
         if usuario_documento == documento:
-            print(f"\n❌ O {tipo_usuario} não pode ser o mesmo que o titular!\n")
+            print(f"\n❌ O {tipo_usuario} não pode ser o titular!\n")  # noqa
             return False
         return True
 
     @staticmethod
-    def _obter_co_titular(documento, usuarios):
-        return ContaFactory._obter_usuario("cônjuge", documento, usuarios)
+    def _obter_co_titular(usuarios):
+        return ContaFactory._obter_usuario("cônjuge", usuarios)
 
     @staticmethod
-    def _obter_responsavel(documento, usuarios):
-        return ContaFactory._obter_usuario("responsável", documento, usuarios)
+    def _obter_responsavel(usuarios):
+        usuario = ContaFactory._obter_usuario("responsável", usuarios)
+        return usuario
 
     @staticmethod
-    def _criar_instancia_conta(tipo_conta, usuario, co_titular=None):
+    def _criar_instancia_conta(
+        tipo_conta, usuario, co_titular=None, responsavel=None
+    ):  # noqa
         novo_numero_conta = ContaFactory._gerar_numero_conta()
         numero_conta_formatado = ContaFactory._formatar_numero_conta(
             tipo_conta, novo_numero_conta
@@ -177,7 +211,16 @@ class ContaFactory:
             print("\n❌ Tipo de conta inválido! Tente novamente.\n")
             return None
 
-        return instancia_conta(usuario, numero_conta_formatado, co_titular=co_titular)
+        if tipo_conta == "5":  # Conta Conjunta
+            return instancia_conta(
+                usuario, numero_conta_formatado, co_titular=co_titular
+            )  # noqa
+        elif tipo_conta == "6":  # Conta Menor Idade
+            return instancia_conta(
+                usuario, numero_conta_formatado, responsavel=responsavel
+            )  # noqa
+        else:
+            return instancia_conta(usuario, numero_conta_formatado)  # noqa
 
     @staticmethod
     def _realizar_deposito_inicial(conta):
@@ -195,7 +238,6 @@ class ContaFactory:
                 input("-> Digite o valor do depósito inicial: R$ ")
             )  # noqa
             if valor_deposito >= valor_deposito_inicial:
-                conta.depositar(valor_deposito)
                 transacao = Deposito(valor_deposito)
                 transacao.registrar(conta)
                 break
