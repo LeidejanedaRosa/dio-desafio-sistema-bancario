@@ -8,9 +8,10 @@ def documento_existe(documento, clientes):
     )
 
 
-def obter_documento():
+def obter_documento(eEdicao=False):
+    label = "editado" if eEdicao else "excluído"
     documento = input(
-        "Digite o CPF ou CNPJ do usuário a ser editado (somente números): "
+        f"Digite o CPF ou CNPJ do usuário a ser {label} (somente números): "
     )
     return documento.replace(".", "").replace("-", "").strip()
 

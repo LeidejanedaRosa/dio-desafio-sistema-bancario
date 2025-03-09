@@ -28,6 +28,12 @@ class Cliente:
             "endereco": "Via Silvestre Ferraz, 175 - Carioca - São Lourenço/MG",
             "data_nascimento": "03/05/1981",
         },
+        {
+            "cnpj": "12123123000100",
+            "nome": "Leidejane da Silva Nascimento da Rosa",
+            "endereco": "Via Silvestre Ferraz, 175 - Carioca - São Lourenço/MG",
+            "data_abertura": "20/04/2023",
+        },
     ]
 
     def __init__(self, endereco):
@@ -36,31 +42,38 @@ class Cliente:
 
     @classmethod
     def adicionar_conta(cls, conta):
-
-        documento_cliente = conta._cliente["cpf"] if conta._cliente else None
-        conjuge_responsavel = (conta._co_titular and conta._co_titular.get("cpf")) or (
-            conta._responsavel and conta._responsavel.get("cpf")
+        documento_cliente = (
+            conta._cliente.get("cpf") or conta._cliente.get("cnpj")
+            if conta._cliente
+            else None
         )
 
-        print("documento_cliente ---------------> ", documento_cliente)
-        print("conjuge_responsavel ---------------> ", conjuge_responsavel)
+        conjuge_responsavel = (
+            conta._co_titular.get("cpf") if conta._co_titular else None
+        ) or (conta._responsavel.get("cpf") if conta._responsavel else None)
 
-        # Encontrar os clientes na lista
         cliente_principal = next(
-            (c for c in cls.clientes if c.get("cpf") == documento_cliente), None  # noqa
-        )
-        conjuge_responsavel = next(
-            (c for c in cls.clientes if c.get("cpf") == conjuge_responsavel),
+            (
+                c
+                for c in cls.clientes
+                if c.get("cpf") == documento_cliente
+                or c.get("cnpj") == documento_cliente
+            ),
             None,  # noqa
         )
-
+        documento_conjuge_responsavel = next(
+            (
+                c
+                for c in cls.clientes
+                if c.get("cpf") and c.get("cpf") == conjuge_responsavel
+            ),
+            None,
+        )
         if cliente_principal:
             cliente_principal.setdefault("contas", []).append(conta)
 
-        if conjuge_responsavel:
-            conjuge_responsavel.setdefault("contas", []).append(conta)
-
-        print("cls.clientes ---------------> ", cls.clientes)
+        if documento_conjuge_responsavel is not None:
+            documento_conjuge_responsavel.setdefault("contas", []).append(conta)  # noqa
 
     def realizar_transacao(self, conta, transacao):
         transacao.registrar(conta)
@@ -107,6 +120,56 @@ class Cliente:
         novo_nome, nova_data, novo_endereco = obter_novos_dados(usuario)
         atualizar_usuario(usuario, novo_nome, nova_data, novo_endereco)
         print("\n\n✅ Dados do usuário atualizados com sucesso!\n\n")
+
+    @classmethod
+    def excluir_usuario(cls):
+        documento = obter_documento()
+        valido, mensagem = validar_documento(documento)
+        if not valido:
+            print(f"\n{mensagem}\n")
+            return
+
+        usuario = encontrar_usuario(cls.clientes, documento)
+        if not usuario:
+            print("\n\n❌ Usuário não encontrado!\n\n")
+            return
+
+        # Verificar se o usuário tem contas ativas
+        contas_ativas = [
+            conta
+            for conta in usuario.get("contas", [])
+            if not getattr(conta, "_data_encerramento", False)
+        ]
+        contas_str = (
+            "\n ".join(str(conta) for conta in contas_ativas)
+            if contas_ativas
+            else "Nenhuma conta cadastrada!"
+        )
+
+        if contas_ativas:
+            print(
+                "❌ Usuário possui conta(s) ativa(s)! Por favor, encerre as contas e saque os valores antes de excluir o cadastro."  # noqa
+            )
+            print("\n📌 Contas ativas do usuário:")
+            print(contas_str)
+            return
+
+        print("\n📌 Dados do usuário:")
+        for chave, valor in usuario.items():
+            if chave != "contas":
+                print(f"{chave.capitalize()}: {valor}")
+
+        confirmacao = (
+            input("\n❗ Tem certeza que deseja excluir este usuário? (S/N): ")
+            .strip()
+            .lower()
+        )
+        if confirmacao != "s":
+            print("\n🚫 Operação cancelada!\n")
+            return
+
+        cls.clientes.remove(usuario)
+        print("\n\n✅ Usuário excluído com sucesso!\n\n")
 
     def __str__(self):
         return f"Clientes: {self.clientes}"

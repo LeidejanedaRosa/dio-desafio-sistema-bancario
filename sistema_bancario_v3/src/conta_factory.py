@@ -17,6 +17,19 @@ from src.transacao import Deposito
 
 class ContaFactory:
     @staticmethod
+    def _cadastrar_senha():
+        while True:
+            senha = input("🔐 Defina uma senha para a conta: ")
+            if len(senha) < 6:
+                print("❌ A senha deve ter pelo menos 6 caracteres.")
+                continue
+            confirmar = input("🔁 Confirme sua senha: ")
+            if senha != confirmar:
+                print("❌ As senhas não coincidem. Tente novamente.")
+                continue
+            return senha
+
+    @staticmethod
     def criar_conta(usuarios):
         documento = ContaFactory._obter_documento_usuario()
         usuario = encontrar_usuario(usuarios, documento)
@@ -26,26 +39,29 @@ class ContaFactory:
             return
 
         responsavel = None
-        valido, mensagem = ContaFactory._validar_idade_usuario(usuario)
+        if len(documento) == 11:
+            valido, mensagem = ContaFactory._validar_idade_usuario(usuario)
 
-        if not valido:
-            print(mensagem)
-            responsavel = ContaFactory._obter_responsavel(usuarios)
-            if not responsavel:
-                print("\n🔔 Responsável não encontrado! Cadastre-o primeiro.\n")  # noqa
-                return
-            if not ContaFactory._validar_usuario_diferente_titular(
-                usuario["cpf"], responsavel["cpf"], "responsável"
-            ):
-                return
-            if not ContaFactory.verificar_usuario_possui_conta_ativa(
-                responsavel
-            ):  # noqa
-                print(
-                    "\n❌ Responsável não possui conta ativa! Precisa abrir uma conta primeiro.\n"  # noqa
-                )
-                return
-            print("\nResponsável encontrado. Continuando...\n")
+            if not valido:
+                print(mensagem)
+                responsavel = ContaFactory._obter_responsavel(usuarios)
+                if not responsavel:
+                    print(
+                        "\n🔔 Responsável não encontrado! Cadastre-o primeiro.\n"  # noqa
+                    )  # noqa
+                    return
+                if not ContaFactory._validar_usuario_diferente_titular(
+                    usuario["cpf"], responsavel["cpf"], "responsável"
+                ):
+                    return
+                if not ContaFactory.verificar_usuario_possui_conta_ativa(
+                    responsavel
+                ):  # noqa
+                    print(
+                        "\n❌ Responsável não possui conta ativa! Precisa abrir uma conta primeiro.\n"  # noqa
+                    )
+                    return
+                print("\nResponsável encontrado. Continuando...\n")
 
         tipo_conta = ContaFactory._selecionar_tipo_conta(usuario)
         if not tipo_conta:
@@ -67,12 +83,16 @@ class ContaFactory:
                 print("\n❌ Cônjuge não pode ser menor de idade. \n")
                 return
 
+        senha = ContaFactory._cadastrar_senha()
+
         conta = (
             ContaFactory._criar_instancia_conta(
-                tipo_conta, usuario, co_titular, responsavel
+                tipo_conta, usuario, senha, co_titular, responsavel
             )
             if tipo_conta in ["5", "6"]
-            else ContaFactory._criar_instancia_conta(tipo_conta, usuario)
+            else ContaFactory._criar_instancia_conta(
+                tipo_conta, usuario, senha=senha
+            )  # noqa
         )  # noqa
         if not conta:
             return
@@ -116,6 +136,11 @@ class ContaFactory:
             if key not in contas_usuario
         }
 
+        # Verificar se o usuário é co-titular em outra conta conjunta
+        for conta in Conta.contas:
+            if conta._co_titular == usuario:
+                tipos_conta.pop("5", None)  # Remove a opção de conta conjunta
+
         if not tipos_conta:
             print("\n❌ Usuário já possui todas as contas possíveis.\n")
             return None
@@ -158,7 +183,12 @@ class ContaFactory:
     @staticmethod
     def verificar_usuario_possui_conta_ativa(usuario):
         for conta in Conta.contas:
-            if conta._cliente == usuario and conta.verificar_conta_ativa():
+            print("conta", conta)
+            if (
+                conta._cliente == usuario
+                or conta._co_titular == usuario
+                and conta.verificar_conta_ativa()
+            ):
                 return True
         return False
 
@@ -188,7 +218,7 @@ class ContaFactory:
 
     @staticmethod
     def _criar_instancia_conta(
-        tipo_conta, usuario, co_titular=None, responsavel=None
+        tipo_conta, usuario, senha, co_titular=None, responsavel=None
     ):  # noqa
         novo_numero_conta = ContaFactory._gerar_numero_conta()
         numero_conta_formatado = ContaFactory._formatar_numero_conta(
@@ -213,14 +243,20 @@ class ContaFactory:
 
         if tipo_conta == "5":  # Conta Conjunta
             return instancia_conta(
-                usuario, numero_conta_formatado, co_titular=co_titular
+                usuario,
+                numero_conta_formatado,
+                co_titular=co_titular,
+                senha=senha,  # noqa
             )  # noqa
         elif tipo_conta == "6":  # Conta Menor Idade
             return instancia_conta(
-                usuario, numero_conta_formatado, responsavel=responsavel
+                usuario,
+                numero_conta_formatado,
+                responsavel=responsavel,
+                senha=senha,  # noqa
             )  # noqa
         else:
-            return instancia_conta(usuario, numero_conta_formatado)  # noqa
+            return instancia_conta(usuario, numero_conta_formatado, senha)  # noqa
 
     @staticmethod
     def _realizar_deposito_inicial(conta):

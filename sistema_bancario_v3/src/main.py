@@ -18,7 +18,7 @@ def menu_principal():
         option = input(
             "\nBem-vindo(a) ao Banco Python!\nEscolha uma opção:\n\n"
             "[0] - Saldo\n[1] - Saque\n[2] - Depósito\n[3] - Extrato\n[4] - Criar Usuário\n[5] - Editar Usuários\n"  # noqa
-            "[6] - Listar Usuários\n[7] - Criar Conta\n[8] - Listar Contas\n[9] - Encerrar Conta\n[10] - Sair\n\n"  # noqa
+            "[6] - Listar Usuários\n[7] - Excluir Usuário\n[8] - Criar Conta\n[9] - Listar Contas\n[10] - Encerrar Conta\n[11] - Sair\n\n"  # noqa
             "Digite o número da opção desejada: "
         )
 
@@ -37,27 +37,38 @@ def menu_principal():
         elif option == "6":
             Cliente.listar_usuarios()
         elif option == "7":
-            ContaFactory.criar_conta(usuarios)
+            Cliente.excluir_usuario()
         elif option == "8":
-            Conta.listar_contas()
+            ContaFactory.criar_conta(usuarios)
         elif option == "9":
-            Conta.encerrar_conta()
+            Conta.listar_contas()
         elif option == "10":
+            Conta.encerrar_conta()
+        elif option == "11":
             print("\n\n👋 Obrigado por usar o Banco Python! Até mais!\n\n")
             break
         else:
             print("\n\n❌ Opção inválida! Tente novamente.\n\n")
 
 
+def solicitar_senha(conta):
+    senha = input("Digite a senha da conta: ")
+    if conta.validar_senha(senha):
+        return True
+    else:
+        print("\n❌ Senha incorreta! Tente novamente.\n")
+        return False
+
+
 def exibir_saldo():
     conta = Conta.obter_conta()
-    if conta:
+    if conta and solicitar_senha(conta):
         conta.exibir_saldo()
 
 
 def realizar_saque():
     conta = Conta.obter_conta()
-    if conta:
+    if conta and solicitar_senha(conta):
         valor = float(input("Digite o valor do saque: R$ "))
         transacao = Saque(valor)
         transacao.registrar(conta)
@@ -65,7 +76,7 @@ def realizar_saque():
 
 def realizar_deposito():
     conta = Conta.obter_conta()
-    if conta:
+    if conta and solicitar_senha(conta):
         valor = float(input("Digite o valor do depósito: R$ "))
         transacao = Deposito(valor)
         transacao.registrar(conta)
@@ -73,7 +84,7 @@ def realizar_deposito():
 
 def exibir_extrato():
     conta = Conta.obter_conta()
-    if conta:
+    if conta and solicitar_senha(conta):
         conta.exibir_extrato()
 
 

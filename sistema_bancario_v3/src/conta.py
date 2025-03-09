@@ -18,6 +18,7 @@ class Conta(ABC):
         historico=None,
         co_titular=None,
         responsavel=None,
+        senha=None,
     ):
         self._saldo = 0
         self._cliente = cliente
@@ -27,6 +28,7 @@ class Conta(ABC):
         self._data_encerramento = None
         self._co_titular = co_titular
         self._responsavel = responsavel
+        self._senha = senha
 
     @property
     def historico(self):
@@ -47,6 +49,9 @@ class Conta(ABC):
             )  # noqa
             return False
         return True
+
+    def validar_senha(self, senha):
+        return self._senha == senha
 
     def exibir_saldo(self):
         if not self.verificar_conta_ativa():
