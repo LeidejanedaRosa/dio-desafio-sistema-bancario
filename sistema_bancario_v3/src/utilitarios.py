@@ -1,4 +1,4 @@
-from src.validators import validar_data, validar_documento
+from src.validadores import validar_data, validar_documento
 
 
 def documento_existe(documento, clientes):

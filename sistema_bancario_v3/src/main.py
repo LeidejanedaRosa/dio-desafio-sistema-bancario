@@ -1,5 +1,5 @@
-from src.utils import documento_existe
-from src.validators import (
+from src.utilitarios import documento_existe
+from src.validadores import (
     validar_data,
     validar_documento,
     validar_endereco,
@@ -8,7 +8,7 @@ from src.validators import (
 from src.transacao import Deposito, Saque
 from src.cliente import Cliente, PessoaFisica, PessoaJuridica
 from src.conta import Conta
-from src.conta_factory import ContaFactory
+from src.criar_conta import CriarConta
 
 
 def menu_principal():
@@ -39,7 +39,7 @@ def menu_principal():
         elif option == "7":
             Cliente.excluir_usuario()
         elif option == "8":
-            ContaFactory.criar_conta(usuarios)
+            CriarConta.criar_conta(usuarios)
         elif option == "9":
             Conta.listar_contas()
         elif option == "10":

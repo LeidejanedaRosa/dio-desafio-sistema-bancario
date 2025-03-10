@@ -2,7 +2,7 @@ from typing import List
 from datetime import datetime
 from abc import ABC, abstractmethod
 
-from src.validators import validar_numero_conta
+from src.validadores import validar_numero_conta
 from src.transacao import Historico
 
 
@@ -73,10 +73,15 @@ class Conta(ABC):
         return len(saques_hoje)
 
     def verificar_limites(self, valor_saque) -> bool:
-        if self.contar_saques_diarios() >= self._limite_saques:
+        print("self._limite_saques", self._limite_saques)
+        print("self._limite", self._limite)
+        if (
+            self._limite_saques > 0
+            and self.contar_saques_diarios() >= self._limite_saques
+        ):
             print("\n❌ Limite de saques diários atingido\n")
             return False
-        if valor_saque > self._limite:
+        if self._limite > 0 and valor_saque > self._limite:
             print("\n❌ Valor do saque excede o limite permitido\n")
             return False
         return True
@@ -160,7 +165,7 @@ class Conta(ABC):
         if conta:
             if conta.saldo > 0:
                 print(
-                    f"\n❌ A conta possui saldo de R$ {conta.saldo:.2f}. Por favor, saque o valor antes de encerrar a conta.\n"
+                    f"\n❌ A conta possui saldo de R$ {conta.saldo:.2f}. Por favor, saque o valor antes de encerrar a conta.\n"  # noqa
                 )
                 return None
 

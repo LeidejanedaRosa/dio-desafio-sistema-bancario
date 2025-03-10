@@ -1,5 +1,5 @@
-from src.validators import validar_documento
-from src.utils import (
+from src.validadores import validar_documento
+from src.utilitarios import (
     atualizar_usuario,
     encontrar_usuario,
     exibir_dados_usuario,
@@ -9,32 +9,7 @@ from src.utils import (
 
 
 class Cliente:
-    clientes: list[dict] = [
-        {
-            "cpf": "12345678911",
-            "nome": "Maria Alice Nascimento da Rosa",
-            "endereco": "Via Silvestre Ferraz, 175 - Carioca - São Lourenço/MG",
-            "data_nascimento": "17/08/2018",
-        },
-        {
-            "cpf": "08062655741",
-            "nome": "Frederico Carlos da Rosa",
-            "endereco": "Via Silvestre Ferraz, 175 - Carioca - São Lourenço/MG",
-            "data_nascimento": "14/04/1978",
-        },
-        {
-            "cpf": "08368795702",
-            "nome": "Leidejane da Silva Nascimento da Rosa",
-            "endereco": "Via Silvestre Ferraz, 175 - Carioca - São Lourenço/MG",
-            "data_nascimento": "03/05/1981",
-        },
-        {
-            "cnpj": "12123123000100",
-            "nome": "Leidejane da Silva Nascimento da Rosa",
-            "endereco": "Via Silvestre Ferraz, 175 - Carioca - São Lourenço/MG",
-            "data_abertura": "20/04/2023",
-        },
-    ]
+    clientes: list[dict] = []
 
     def __init__(self, endereco):
         self._endereco = endereco

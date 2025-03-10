@@ -321,17 +321,17 @@ class Conta(ABC):
         return f"Cliente: {documento}, {co_titular} Agência: {self._agencia}, Conta: {self._numero_conta}, Saldo: R$ {self._saldo:.2f}, {encerramento}"  # noqa
 
 
-class ContaFactory:
+class CriarConta:
     @staticmethod
     def criar_conta(usuarios):
-        documento = ContaFactory._obter_documento_usuario()
+        documento = CriarConta._obter_documento_usuario()
         usuario = encontrar_usuario(usuarios, documento)
 
         if not usuario:
             print("\n 🔔 Usuário não encontrado! Cadastre-o primeiro.\n")
             return
 
-        tipo_conta = ContaFactory._selecionar_tipo_conta(usuario)
+        tipo_conta = CriarConta._selecionar_tipo_conta(usuario)
         co_titular = None
 
         if tipo_conta == "5":  # Conta Conjunta
@@ -346,16 +346,16 @@ class ContaFactory:
             if not co_titular:
                 print("\n❌ Cônjuge não encontrado! Cadastre-o primeiro.\n")
                 return
-            conta = ContaFactory._criar_instancia_conta(
+            conta = CriarConta._criar_instancia_conta(
                 tipo_conta, usuario, co_titular
             )  # noqa
         else:
-            conta = ContaFactory._criar_instancia_conta(tipo_conta, usuario)
+            conta = CriarConta._criar_instancia_conta(tipo_conta, usuario)
         if not conta:
             print("\n❌ Tipo de conta inválido! Tente novamente.\n")
             return
 
-        ContaFactory._realizar_deposito_inicial(conta)
+        CriarConta._realizar_deposito_inicial(conta)
         Conta.contas.append(conta)
         Cliente.adicionar_conta(usuario, conta)
         if tipo_conta == "5":  # Conta Conjunta
@@ -389,7 +389,7 @@ class ContaFactory:
 
             if idade < 18:
                 print("\nUsuário menor de idade. Informe o responsável...\n")
-                responsavel = ContaFactory._obter_responsavel()
+                responsavel = CriarConta._obter_responsavel()
                 if not responsavel:
                     print(
                         "\n❌ Nenhum responsável encontrado com conta ativa!\n"
@@ -458,8 +458,8 @@ class ContaFactory:
 
     @staticmethod
     def _criar_instancia_conta(tipo_conta, usuario, co_titular=None):
-        novo_numero_conta = ContaFactory._gerar_numero_conta()
-        numero_conta_formatado = ContaFactory._formatar_numero_conta(
+        novo_numero_conta = CriarConta._gerar_numero_conta()
+        numero_conta_formatado = CriarConta._formatar_numero_conta(
             tipo_conta, novo_numero_conta
         )
 
@@ -737,7 +737,7 @@ def menu_principal():
         elif option == "6":
             Cliente.listar_usuarios()
         elif option == "7":
-            ContaFactory.criar_conta(usuarios)
+            CriarConta.criar_conta(usuarios)
         elif option == "8":
             Conta.listar_contas()
         elif option == "9":
