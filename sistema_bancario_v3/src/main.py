@@ -53,7 +53,7 @@ def menu_principal():
 
 def solicitar_senha(conta):
     senha = input("Digite a senha da conta: ")
-    if conta.validar_senha(senha):
+    if conta.validar_senha(conta, senha):
         return True
     else:
         print("\n❌ Senha incorreta! Tente novamente.\n")

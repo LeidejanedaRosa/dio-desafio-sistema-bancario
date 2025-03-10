@@ -23,7 +23,7 @@ class Deposito(Transacao):
     def registrar(self, conta):
         if conta.depositar(self.valor):
             data_hora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-            conta.historico.adicionar_transacao(
+            conta._historico.adicionar_transacao(
                 f"{data_hora} + R$ {self.valor:.2f}"
             )  # noqa
 
@@ -33,8 +33,7 @@ class Saque(Transacao):
         self.valor = valor
 
     def registrar(self, conta):
+
         if conta.sacar(self.valor):
             data_hora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-            conta.historico.adicionar_transacao(
-                f"{data_hora} - R$ {self.valor:.2f}"
-            )  # noqa
+            conta._historico.adicionar_transacao(f"{data_hora} - R$ {self.valor:.2f}")

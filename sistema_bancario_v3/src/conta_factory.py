@@ -73,6 +73,11 @@ class ContaFactory:
             if not co_titular:
                 print("\n🔔 Cônjuge não encontrado! Cadastre-o primeiro.\n")
                 return
+
+            if "cpf" not in co_titular or len(co_titular["cpf"]) != 11:
+                print("\n❌ Cônjuge não pode ser uma pessoa jurídica.\n")
+                return
+
             if not ContaFactory._validar_usuario_diferente_titular(
                 usuario["cpf"], co_titular["cpf"], "cônjuge"
             ):
@@ -84,14 +89,17 @@ class ContaFactory:
                 return
 
         senha = ContaFactory._cadastrar_senha()
-
         conta = (
             ContaFactory._criar_instancia_conta(
-                tipo_conta, usuario, senha, co_titular, responsavel
+                tipo_conta=tipo_conta,
+                usuario=usuario,
+                senha=senha,
+                co_titular=co_titular,
+                responsavel=responsavel,
             )
             if tipo_conta in ["5", "6"]
             else ContaFactory._criar_instancia_conta(
-                tipo_conta, usuario, senha=senha
+                tipo_conta=tipo_conta, usuario=usuario, senha=senha
             )  # noqa
         )  # noqa
         if not conta:
@@ -243,20 +251,24 @@ class ContaFactory:
 
         if tipo_conta == "5":  # Conta Conjunta
             return instancia_conta(
-                usuario,
-                numero_conta_formatado,
-                co_titular=co_titular,
+                cliente=usuario,
+                numero_conta=numero_conta_formatado,
                 senha=senha,  # noqa
+                co_titular=co_titular,
             )  # noqa
         elif tipo_conta == "6":  # Conta Menor Idade
             return instancia_conta(
-                usuario,
-                numero_conta_formatado,
-                responsavel=responsavel,
+                cliente=usuario,
+                numero_conta=numero_conta_formatado,
                 senha=senha,  # noqa
+                responsavel=responsavel,
             )  # noqa
         else:
-            return instancia_conta(usuario, numero_conta_formatado, senha)  # noqa
+            return instancia_conta(
+                cliente=usuario,
+                numero_conta=numero_conta_formatado,
+                senha=senha,  # noqa
+            )  # noqa
 
     @staticmethod
     def _realizar_deposito_inicial(conta):

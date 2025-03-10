@@ -105,7 +105,7 @@ class Cliente:
 
     @classmethod
     def editar_usuario(cls):
-        documento = obter_documento()
+        documento = obter_documento(eEdicao=True)
         valido, mensagem = validar_documento(documento)
         if not valido:
             print(f"\n{mensagem}\n")
@@ -148,7 +148,7 @@ class Cliente:
 
         if contas_ativas:
             print(
-                "❌ Usuário possui conta(s) ativa(s)! Por favor, encerre as contas e saque os valores antes de excluir o cadastro."  # noqa
+                "\n❌ Usuário possui conta(s) ativa(s)! Por favor, encerre as contas e saque os valores antes de excluir o cadastro."  # noqa
             )
             print("\n📌 Contas ativas do usuário:")
             print(contas_str)
